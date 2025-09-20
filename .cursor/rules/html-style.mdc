@@ -1,0 +1,12 @@
+---
+globs: *.html
+description: Règles de style HTML/CSS pour le one‑pager Napoléon
+---
+# Conventions HTML/CSS
+
+- Utiliser une **page unique** avec sections sémantiques: `header`, `main`, `section`, `footer`.
+- CSS embarqué dans `<style>` au sein de `index.html` (pas de framework externe).
+- Couleurs système variables CSS `--brand`, `--text`, `--bg`, `--line`; support `prefers-color-scheme`.
+- Grilles responsives en CSS pur (display grid/flex). Pas de JS pour la mise en page.
+- Boutons CTA `.btn.primary` et `.btn.ghost` réutilisables.
+- Garder le HTML lisible: classes courtes, sections identifiées (`id`).

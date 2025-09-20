@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+# Conventions d’édition
+
+- Préserver l’indentation et ne pas mélanger espaces/onglets.
+- Ne pas introduire de dépendances externes; rester 100% HTML/CSS/JS natif.
+- Utiliser le contenu des fichiers `.md` comme source pour les textes.
+- Optimiser pour la **lisibilité** et une **typographie sobre**.
+- Les modifications substantielles doivent conserver la structure en sections: Hero, Comment, Résultats, Intégrations, Sécurité, Tarifs, FAQ, Démo, Formulaire.

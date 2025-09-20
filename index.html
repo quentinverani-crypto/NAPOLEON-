@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Napoléon · IA, Blockchain & Santé</title>
+  <meta name="description" content="Napoléon transforme chaque dictée médicale en compte-rendu structuré, ordonnance et documents patients prêts en moins de 60 secondes, avec validation clinique, sécurité HDS et traçabilité blockchain.">
+  <style>
+    :root {
+      --bg: #05040b;
+      --surface: rgba(11, 10, 20, 0.92);
+      --card: rgba(17, 16, 30, 0.9);
+      --text: #eef0ff;
+      --muted: #9ca0c9;
+      --line: #1e1b33;
+      --gradient: linear-gradient(110deg, #1b4bff 0%, #7a2ff5 45%, #ff3ea5 100%);
+      --accent: #a388ff;
+      --accent-strong: #ff4fa0;
+      --container: min(1080px, 92vw);
+      --container-narrow: min(860px, 90vw);
+      --radius: 18px;
+      --shadow: 0 28px 70px rgba(3, 4, 10, 0.55);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 720px at 18% -10%, rgba(122,47,245,0.16), transparent 70%),
+        radial-gradient(980px 720px at 82% 0%, rgba(33,140,255,0.14), transparent 75%),
+        radial-gradient(1040px 840px at 52% 120%, rgba(255,62,165,0.12), transparent 80%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: color-mix(in oklab, var(--surface) 92%, transparent);
+      backdrop-filter: blur(18px) saturate(160%);
+      border-bottom: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+    }
+
+    .nav {
+      width: var(--container);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 76px;
+      height: 76px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 22px 46px rgba(58, 33, 140, 0.32);
+    }
+
+    .brand span {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: .18rem;
+      text-transform: uppercase;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: .95rem;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    nav a:hover, nav a:focus-visible {
+      color: var(--text);
+      border-color: color-mix(in oklab, var(--accent) 65%, var(--accent-strong));
+    }
+
+    main { width: 100%; }
+
+    section {
+      padding: clamp(64px, 10vw, 96px) 0;
+      position: relative;
+      z-index: 0;
+    }
+
+    section::after {
+      content: "";
+      position: absolute;
+      top: -160px;
+      left: -30%;
+      right: -30%;
+      height: 320px;
+      background: radial-gradient(60% 60% at 50% 25%, rgba(122,47,245,0.12), transparent 75%);
+      filter: blur(140px);
+      opacity: 1;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container { width: var(--container); margin: 0 auto; }
+
+    h1, h2, h3 { color: var(--text); margin: 0 0 18px; }
+    h1 span, h2 span, h3 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    p { margin: 0 0 16px; }
+
+    .hero .container {
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      gap: 32px;
+    }
+
+    .hero__logo {
+      width: clamp(220px, 32vw, 320px);
+      display: grid;
+      place-items: center;
+      padding: 0;
+      background: none;
+      filter: drop-shadow(0 30px 60px rgba(40,20,80,0.45));
+    }
+
+    .hero__logo img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      mix-blend-mode: screen;
+      filter: saturate(120%) brightness(1.05);
+    }
+
+    .hero__content {
+      display: grid;
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .hero__content p { margin: 0; max-width: 640px; }
+
+    .hero__eyebrow {
+      letter-spacing: .3rem;
+      text-transform: uppercase;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .hero__headline {
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      line-height: 1.12;
+    }
+
+    .hero__lead {
+      font-size: clamp(1.05rem, 2.3vw, 1.25rem);
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .hero__steps {
+      width: var(--container-narrow);
+      display: grid;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    @media (min-width: 720px) {
+      .hero__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .step-card {
+      background: color-mix(in oklab, var(--card) 88%, transparent);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 32px;
+      border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+      box-shadow: 0 30px 70px rgba(12, 8, 22, 0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      text-align: left;
+      min-height: 100%;
+    }
+
+    .step-card h4 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.6vw, 1.75rem);
+      font-weight: 700;
+      letter-spacing: .05rem;
+      text-transform: none;
+      color: var(--text);
+    }
+
+    .step-card p {
+      margin: 0;
+      color: color-mix(in oklab, var(--muted) 90%, var(--text) 10%);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 719px) {
+      .step-card { text-align: left; }
+    }
+
+    .cta {
+      margin-top: 24px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn.primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 22px 42px rgba(122,47,245,0.35);
+    }
+
+    .btn.secondary {
+      background: rgba(18, 16, 32, 0.82);
+      border: 1px solid color-mix(in oklab, var(--accent) 40%, transparent);
+      color: color-mix(in oklab, var(--accent) 80%, #f8f6ff 20%);
+    }
+
+    .btn:hover, .btn:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .section-intro {
+      width: var(--container-narrow);
+      margin: 0 auto 36px;
+      text-align: center;
+      display: grid;
+      gap: 12px;
+    }
+
+    .section-intro p { margin: 0; color: var(--muted); }
+
+    .section-alt {
+      position: relative;
+    }
+
+    .section-alt::before {
+      content: "";
+      position: absolute;
+      inset: -30% -35% 45%;
+      background:
+        radial-gradient(55% 55% at 18% 20%, rgba(33,140,255,0.16), transparent 70%),
+        radial-gradient(58% 58% at 82% 12%, rgba(255,62,165,0.14), transparent 72%);
+      filter: blur(140px);
+      opacity: 0.7;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .section-alt .card {
+      background: color-mix(in oklab, var(--card) 92%, transparent);
+    }
+
+    .data-cards {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    }
+
+    .card {
+      background: color-mix(in oklab, var(--card) 90%, transparent);
+      border-radius: var(--radius);
+      padding: 26px;
+      border: 1px solid color-mix(in oklab, var(--accent) 24%, transparent);
+      box-shadow: 0 26px 60px rgba(8, 4, 20, 0.4);
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+    }
+
+    .metric {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .cards-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .process {
+      counter-reset: step;
+    }
+
+    .process .card::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      display: block;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: .25rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .values-list {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .values-list strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .faq {
+      border-top: 1px solid var(--line);
+    }
+
+    .faq details {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .mission-grid {
+      display: grid;
+      gap: 24px;
+      width: var(--container-narrow);
+      margin: 0 auto 32px;
+    }
+
+    @media (min-width: 960px) {
+      .mission-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .contact { text-align: center; }
+
+    .contact form {
+      display: grid;
+      gap: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+      justify-items: center;
+    }
+
+    #engagements ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (min-width: 960px) {
+      #engagements ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--text);
+      width: 100%;
+      text-align: left;
+    }
+
+    input, textarea, select {
+      border: 1px solid color-mix(in oklab, var(--accent) 18%, white 82%);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font: inherit;
+      background: rgba(255,255,255,0.88);
+      color: inherit;
+    }
+
+    textarea { min-height: 120px; resize: vertical; }
+
+    footer {
+      padding: 40px 0 60px;
+      border-top: 1px solid color-mix(in oklab, var(--line) 45%, transparent);
+      background: color-mix(in oklab, var(--surface) 96%, transparent);
+    }
+
+    footer p {
+      margin: 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 720px) {
+      .nav { flex-direction: column; align-items: flex-start; padding: 16px 0 12px; }
+      nav ul { width: 100%; gap: 12px; flex-wrap: wrap; }
+      nav li { flex: 1 1 calc(50% - 12px); }
+      nav a { display: inline-block; width: 100%; }
+      header { border-bottom: none; }
+      .hero { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#top">
+        <img src="Images/Logo%20seul%20fond%20transparent.png" alt="Logo Napoléon" width="76" height="76">
+        <span>Napoléon</span>
+      </a>
+      <nav aria-label="Navigation principale">
+        <ul>
+          <li><a href="#resultats">Résultats</a></li>
+          <li><a href="#fonctionnement">Solution</a></li>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#securite">Sécurité</a></li>
+          <li><a href="#tarifs">Offre</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero__logo">
+          <img src="Images/Logo%20seul%20fond%20transparent.png" alt="Logo Napoléon">
+        </div>
+        <div class="hero__content">
+          <div class="hero__eyebrow">IA • Blockchain • Santé</div>
+          <h1 class="hero__headline"><span>La dictée médicale nouvelle génération.</span></h1>
+          <p class="hero__lead">Napoléon transforme chaque dictée en compte-rendu structuré, ordonnances et documents pédagogiques pour les patients en quelques secondes.</p>
+          <div class="cta">
+            <a class="btn primary" href="mailto:contact@napoleon.health?subject=Demande%20de%20d%C3%A9mo%20Napol%C3%A9on">Demander une démo</a>
+            <a class="btn secondary" href="#fonctionnement">Voir comment ça marche</a>
+          </div>
+        </div>
+        <div class="hero__steps" aria-label="Parcours Napoléon">
+          <article class="step-card">
+            <h4>1. Dictez</h4>
+            <p>Dictez simplement votre compte-rendu, Napoléon s'occupe du reste.</p>
+          </article>
+          <article class="step-card">
+            <h4>2. Signez</h4>
+            <p>Validez les documents générés. Le codage des actes est automatisé.</p>
+          </article>
+          <article class="step-card">
+            <h4>3. Sécurisez</h4>
+            <p>Les documents sont stockés sur des serveurs sécurisés et chaque action est horodatée et tracée.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultats">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>Résultats qui comptent</span></h2>
+        </div>
+        <div class="data-cards">
+          <article class="card">
+            <div class="metric">45 min/jour</div>
+            <p>Temps moyen rendu par praticien sur 20 consultations quotidiennes grâce à la génération automatique des comptes-rendus et des documents associés.</p>
+          </article>
+          <article class="card">
+            <div class="metric">≤ 30 s</div>
+            <p>Délai moyen entre la fin de la dictée et la disponibilité des documents.</p>
+          </article>
+          <article class="card">
+            <div class="metric">≥ 70 %</div>
+            <p>Comptes-rendus validés sans retouche. Objectif : 80% dès 12 mois.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pourquoi">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>Pourquoi choisir Napoléon&nbsp;?</span></h2>
+          <p>Combiner précision linguistique, sobriété cognitive et traçabilité indépendante pour redonner du temps aux équipes médicales.</p>
+        </div>
+        <div class="cards-grid">
+          <article class="card">
+            <h3>Précision française</h3>
+            <p>Modèles IA entraînés sur du français médical,capable de supporter tous les accents.</p>
+          </article>
+          <article class="card">
+            <h3>Expérience fluide</h3>
+            <p>Tout est généré à partir de la seule dictée du compte-rendu, avec une interface pensée pour limiter la charge cognitive.</p>
+          </article>
+          <article class="card">
+            <h3>Traçabilité</h3>
+            <p>Horodatage immuable avec preuve d'authenticité vérifiable hors plateforme grâce à la blockchain dédiée.</p>
+          </article>
+          <article class="card">
+            <h3>Interopérabilité</h3>
+            <p>Napoléon est intégrable à tous les logiciels métiers.</p>
+          </article>
+          <article class="card">
+            <h3>Hors ligne</h3>
+            <p>En cas de panne de réseau, la synchronisation différée assure la continuité du service.</p>
+          </article>
+          <article class="card">
+            <h3>Documents patients</h3>
+            <p>Documents pédagogiques (traduits si nécessaires) pour replacer le patient au centre de sa pathologie.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission" class="section-alt">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>Mission · Vision · Valeurs</span></h2>
+        </div>
+        <div class="mission-grid">
+          <article class="card">
+            <h3>Mission</h3>
+            <p>Rendre au spécialiste au moins 45&nbsp;minutes par jour en transformant une dictée en compte-rendu structuré, ordonnance et documents patients prêts en ≤ 60&nbsp;secondes, avec validation clinique obligatoire, traçabilité vérifiable et sécurité HDS.</p>
+          </article>
+          <article class="card">
+            <h3>Vision</h3>
+            <p>Devenir la couche standard du texte clinique en Europe&nbsp;: à chaque fois qu’un médecin parle, le dossier se construit, les accès sont prouvés et l’audit est portable, au-delà de la simple reconnaissance vocale.</p>
+          </article>
+        </div>
+        <div class="values-list">
+          <div class="card">
+            <strong>Sûreté par design</strong>
+            <p>RGPD, HDS, pseudonymisation et chiffrement de bout en bout par défaut. Rapports sécurité trimestriels.</p>
+          </div>
+          <div class="card">
+            <strong>Vérité mesurée</strong>
+            <p>Latence P95, % de documents sans retouche, minutes rendues et WER suivis en continu. Dashboard partagé avec les clients.</p>
+          </div>
+          <div class="card">
+            <strong>Validation clinique obligatoire</strong>
+            <p>Flux proposition → relecture → validation, signature CPS/e-CPS, horodatage et identité du validateur dans l’audit.</p>
+          </div>
+          <div class="card">
+            <strong>Sobriété cognitive</strong>
+            <p>Chaque clic doit rendre du temps au soin. UI sans friction mesurée sur les parcours critiques.</p>
+          </div>
+          <div class="card">
+            <strong>Traçabilité indépendante</strong>
+            <p>Blockchain pour l’immutabilité, preuve portable exportable et vérifiable par un tiers.</p>
+          </div>
+          <div class="card">
+            <strong>Interop ouverte</strong>
+            <p>S’intégrer plutôt que remplacer. Connecteurs LPS libéral & hôpital, envoi MSSanté et publication DMP.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="securite">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>Sécurité & conformité</span></h2>
+          <p>Protection des données par design&nbsp;: infrastructures HDS, démarche RGPD opérationnelle et preuve portable via la blockchain.</p>
+        </div>
+        <div class="cards-grid">
+          <article class="card">
+            <h3>Hébergement HDS en France</h3>
+            <p>Données stockées et traitées sur des infrastructures HDS françaises, avec plan de reprise d’activité testé et journal d’accès non PII.</p>
+          </article>
+          <article class="card">
+            <h3>RGPD opérationnel</h3>
+            <p>DPIA et registre tenus à jour, minimisation des données, rotation des secrets et audits réguliers. Aucun entraînement sur données patients sans base légale.</p>
+          </article>
+          <article class="card">
+            <h3>Preuve portable</h3>
+            <p>Hash des documents, timestamp blockchain et export d’audit standard pour vérification indépendante.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="engagements">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>Engagements mesurables (12 mois)</span></h2>
+          <p>Des objectifs publics, suivis chaque trimestre avec nos établissements pilotes.</p>
+        </div>
+        <ul>
+          <li>Latence P95 ≤ 60&nbsp;s (objectif stretch ≤ 30&nbsp;s).</li>
+          <li>≥ 70&nbsp;% de comptes-rendus sans retouche sur les gabarits ciblés.</li>
+          <li>≥ 45&nbsp;minutes rendues par praticien et par jour.</li>
+          <li>Interop totale MSSanté, DMP et ≥ 2 LPS majeurs en pilote.</li>
+          <li>0 PII en clair dans les logs, remédiation moyenne < 72&nbsp;h.</li>
+          <li>Preuve portable disponible pour les établissements pilotes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="tarifs" class="section-alt">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>Offre & déploiement</span></h2>
+          <p>Un lancement guidé pour sécuriser vos parcours, mesurer l’impact et généraliser rapidement.</p>
+        </div>
+        <div class="cards-grid">
+          <article class="card">
+            <h3>Essai 30 jours</h3>
+            <p>Pilote accompagné dans les Pyrénées-Orientales ou à distance. Formation incluse, indicateurs suivis avec votre équipe.</p>
+          </article>
+          <article class="card">
+            <h3>Tarification simple</h3>
+            <p>Licences par siège, sans frais cachés ni surcharge à l’usage. Support et mises à jour continus.</p>
+          </article>
+          <article class="card">
+            <h3>Déploiement guidé</h3>
+            <p>Equipe médicale & produit dédiée pour intégrer Napoléon à vos parcours. Roadmap partagée et retours terrain mensuels.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section-alt" aria-label="Foire aux questions">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>FAQ</span></h2>
+          <p>Les réponses aux questions les plus fréquentes lors des pilotes.</p>
+        </div>
+        <details>
+          <summary>Quelles spécialités sont couvertes au lancement&nbsp;?</summary>
+          <p>Nous déployons d’abord Napoléon en radiologie et ORL, avec des gabarits spécialisés et des métriques publiques. D’autres spécialités suivront selon les retours terrain.</p>
+        </details>
+        <details>
+          <summary>Comment se passe la validation médicale&nbsp;?</summary>
+          <p>Chaque document généré reste une proposition. Le médecin relecture-valide, signe si nécessaire via CPS/e-CPS et l’action est horodatée. Aucun envoi externe n’est possible sans cette validation.</p>
+        </details>
+        <details>
+          <summary>Pouvons-nous l’intégrer à nos logiciels existants&nbsp;?</summary>
+          <p>Oui. Des connecteurs MSSanté, DMP et CI-SIS sont prêts. Nous disposons d’API et de connecteurs LPS pour les principaux éditeurs hospitaliers et libéraux.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-intro">
+          <h2><span>Prêts à rendre du temps au soin&nbsp;?</span></h2>
+          <p>Parlez-nous de votre structure, de vos parcours et des logiciels en place. Nous revenons vers vous sous 24&nbsp;h ouvrées.</p>
+        </div>
+        <form>
+          <label for="name">Nom / établissement
+            <input id="name" name="name" type="text" placeholder="Centre hospitalier Méditerranée" required>
+          </label>
+          <label for="role">Fonction
+            <input id="role" name="role" type="text" placeholder="Radiologue, DSI, DIM…" required>
+          </label>
+          <label for="email">Email professionnel
+            <input id="email" name="email" type="email" placeholder="prenom.nom@structure.fr" required>
+          </label>
+          <label for="message">Message
+            <textarea id="message" name="message" placeholder="Vos objectifs, votre logiciel métier, nombre de praticiens…"></textarea>
+          </label>
+          <button class="btn primary" type="submit">Envoyer</button>
+        </form>
+        <p style="margin-top:12px; font-size:.9rem; color: var(--muted);">Ou écrivez-nous directement : <a href="mailto:contact@napoleon.health">contact@napoleon.health</a>. Aucun document n’est partagé sans votre validation expresse.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Napoléon · IA, Blockchain & Santé. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear().toString();
+  </script>
+</body>
+</html>

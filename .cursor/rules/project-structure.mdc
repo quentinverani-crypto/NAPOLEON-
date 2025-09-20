@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+---
+# Structure du projet web Napoléon
+
+- Point d’entrée: [index.html](mdc:index.html)
+- Ressources: logo sous [Images/Logo.png](mdc:Images/Logo.png)
+- Sources de contenu marketing:
+  - Étude marché: [Etude_De_Marche_Napoléon_v1.md](mdc:Etude_De_Marche_Napoléon_v1.md)
+  - Mission/Vision/Valeurs: [mission_vision_valeurs_napoleon_v1.md](mdc:mission_vision_valeurs_napoleon_v1.md)
+
+Guides:
+- Le site est une page unique; la navigation se fait par ancres internes.
+- Le contenu public prioritaire provient de l’étude marché; le document MVV sert de référence secondaire.
