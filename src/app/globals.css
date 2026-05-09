@@ -12,18 +12,20 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-gfs-didot), "GFS Didot", Georgia, serif;
 
-  /* Brand colors */
-  --color-napoleon-light: #8fd1ff;
-  --color-napoleon-deep: #2911bf;
-  --color-napoleon-blue: #34b0ff;
-  --color-napoleon-purple: #6e5cf6;
-  --color-napoleon-charcoal: #232526;
-  --color-napoleon-black: #0f1012;
-  --color-napoleon-warm: #1a1614;
-  --color-napoleon-warm-deep: #14100e;
-  --color-napoleon-gold: #f2da4e;
-  --color-napoleon-gold-dark: #d9ad2e;
-  --color-napoleon-gray: #f3f4f5;
+  /* Brand colors — Pitch deck charte graphique */
+  --color-napoleon-light: #7da4d3;       /* light royal blue accent */
+  --color-napoleon-deep: #3a5a9c;        /* primary royal blue */
+  --color-napoleon-blue: #3a5a9c;        /* primary royal blue */
+  --color-napoleon-purple: #5b7fb8;      /* secondary blue */
+  --color-napoleon-charcoal: #eef1f6;    /* light gray panel */
+  --color-napoleon-black: #ffffff;       /* main canvas */
+  --color-napoleon-warm: #faf6ee;        /* cream alt section */
+  --color-napoleon-warm-deep: #f3ebd9;   /* deeper cream */
+  --color-napoleon-gold: #c9a64a;        /* ochre gold */
+  --color-napoleon-gold-dark: #a98637;   /* deeper ochre */
+  --color-napoleon-gray: #f3f4f5;        /* light gray */
+  --color-napoleon-ink: #1a2540;         /* dark navy text */
+  --color-napoleon-ink-soft: #5a6678;    /* muted body text */
 
   /* shadcn tokens */
   --color-sidebar-ring: var(--sidebar-ring);
@@ -65,13 +67,13 @@
 }
 
 :root {
-  --background: #0f1012;
-  --foreground: #f5f4f2;
+  --background: #ffffff;
+  --foreground: #1a2540;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #2911bf;
+  --primary: #3a5a9c;
   --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -82,7 +84,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: #6e5cf6;
+  --ring: #3a5a9c;
   --radius: 0.625rem;
 }
 
@@ -102,10 +104,10 @@
 /* Glow animation for beta form */
 @keyframes glow-breathe {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(110, 92, 246, 0.15), 0 0 40px rgba(110, 92, 246, 0.05);
+    box-shadow: 0 0 20px rgba(58, 90, 156, 0.10), 0 0 40px rgba(58, 90, 156, 0.04);
   }
   50% {
-    box-shadow: 0 0 30px rgba(110, 92, 246, 0.25), 0 0 60px rgba(110, 92, 246, 0.1);
+    box-shadow: 0 0 30px rgba(58, 90, 156, 0.18), 0 0 60px rgba(58, 90, 156, 0.08);
   }
 }
 

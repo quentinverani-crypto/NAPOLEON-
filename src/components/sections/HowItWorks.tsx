@@ -61,15 +61,15 @@ export function HowItWorks() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(41,17,191,0.16) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(58,90,156,0.06) 0%, transparent 70%)",
         }}
       />
-      <div className="absolute inset-0 grain-overlay opacity-[0.08] pointer-events-none" />
+      <div className="absolute inset-0 grain-overlay opacity-[0.03] pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
           <motion.h2
-            className="font-serif text-white leading-[1.05] tracking-tight"
+            className="font-serif text-napoleon-ink leading-[1.05] tracking-tight"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4.25rem)" }}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ export function HowItWorks() {
             <span className="text-napoleon-light italic">aux documents.</span>
           </motion.h2>
           <motion.p
-            className="mt-8 text-white/55 text-base lg:text-lg max-w-xl leading-relaxed"
+            className="mt-8 text-napoleon-ink/55 text-base lg:text-lg max-w-xl leading-relaxed"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -96,7 +96,7 @@ export function HowItWorks() {
         {/* Timeline */}
         <div className="mt-24 relative">
           {/* Desktop: horizontal line */}
-          <div className="hidden lg:block absolute top-[40px] left-[12%] right-[12%] h-px bg-white/10">
+          <div className="hidden lg:block absolute top-[40px] left-[12%] right-[12%] h-px bg-napoleon-ink/10">
             <motion.div
               className="h-full bg-gradient-to-r from-napoleon-deep via-napoleon-light to-napoleon-gold origin-left"
               style={{ scaleX: lineProgress }}
@@ -119,14 +119,14 @@ export function HowItWorks() {
               >
                 {/* Branded emblem badge */}
                 <div className="relative z-10 flex items-center justify-center">
-                  <div className="absolute inset-0 -m-3 rounded-full bg-napoleon-deep/20 blur-2xl" />
+                  <div className="absolute inset-0 -m-3 rounded-full bg-napoleon-deep/10 blur-2xl" />
                   <div className="relative">{step.render()}</div>
                 </div>
 
-                <h3 className="font-serif text-white text-2xl lg:text-3xl mt-8 mb-4 tracking-tight">
+                <h3 className="font-serif text-napoleon-ink text-2xl lg:text-3xl mt-8 mb-4 tracking-tight">
                   {step.title}
                 </h3>
-                <p className="text-white/55 leading-relaxed max-w-xs text-[15px] whitespace-pre-line">
+                <p className="text-napoleon-ink/55 leading-relaxed max-w-xs text-[15px] whitespace-pre-line">
                   {step.description}
                 </p>
               </motion.div>
@@ -149,7 +149,7 @@ export function HowItWorks() {
             >
               3 à 5 min
             </span>
-            <span className="text-white/55 text-sm lg:text-base">
+            <span className="text-napoleon-ink/55 text-sm lg:text-base">
               gagnées par consultation
             </span>
           </div>

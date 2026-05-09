@@ -25,7 +25,7 @@ export default function RootLayout({
       lang="fr"
       className={`${figtree.variable} ${gfsDidot.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-napoleon-black text-white">
+      <body className="min-h-full flex flex-col font-sans bg-napoleon-black text-napoleon-ink">
         {children}
       </body>
     </html>

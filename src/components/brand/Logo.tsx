@@ -17,10 +17,10 @@ export function Logo({
 }) {
   const src =
     variant === "emblem"
-      ? "/logos/napoleon-embleme-negatif.png"
+      ? "/logos/napoleon-embleme-clean.svg"
       : variant === "vertical"
-        ? "/logos/napoleon-negatif-vertical.png"
-        : "/logos/napoleon-negatif-horizontal.png";
+        ? "/logos/napoleon-embleme.png"
+        : "/logos/napoleon-embleme.png";
 
   return (
     <Image

@@ -69,10 +69,10 @@ export function Problem() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 30% 50%, rgba(41,17,191,0.18) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 30% 50%, rgba(58,90,156,0.06) 0%, transparent 70%)",
           }}
         />
-        <div className="absolute inset-0 grain-overlay opacity-[0.08] pointer-events-none" />
+        <div className="absolute inset-0 grain-overlay opacity-[0.03] pointer-events-none" />
 
         {/* Top gold divider */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-napoleon-gold-dark/30 to-transparent" />
@@ -81,7 +81,7 @@ export function Problem() {
         <div className="absolute top-0 left-0 right-0 z-20 pt-24 lg:pt-28">
           <div className="mx-auto max-w-7xl px-6">
             <motion.h2
-              className="font-serif text-white leading-[1.05] tracking-tight max-w-3xl"
+              className="font-serif text-napoleon-ink leading-[1.05] tracking-tight max-w-3xl"
               style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)" }}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -116,7 +116,7 @@ export function Problem() {
             <span className="text-napoleon-gold text-[11px] uppercase tracking-[0.3em] font-medium shrink-0">
               Constat
             </span>
-            <div className="relative flex-1 h-px bg-white/10">
+            <div className="relative flex-1 h-px bg-napoleon-ink/10">
               <motion.div
                 className="absolute inset-y-0 left-0 bg-napoleon-gold"
                 style={{ width: progressWidth }}
@@ -143,7 +143,7 @@ function ChapterCounter({
     return `0${idx + 1} / 0${chapters.length}`;
   });
   return (
-    <motion.span className="text-white/50 text-xs tracking-[0.2em] font-mono shrink-0">
+    <motion.span className="text-napoleon-ink/50 text-xs tracking-[0.2em] font-mono shrink-0">
       {count}
     </motion.span>
   );
@@ -156,7 +156,7 @@ function ChapterSlide({ chapter, index }: { chapter: Chapter; index: number }) {
         {/* Big stat */}
         <div className="lg:col-span-7">
           <div
-            className="font-serif text-white leading-[0.95] tracking-tight"
+            className="font-serif text-napoleon-ink leading-[0.95] tracking-tight"
             style={{ fontSize: "clamp(3.5rem, 9vw, 9rem)" }}
           >
             {chapter.statLine1}
@@ -170,7 +170,7 @@ function ChapterSlide({ chapter, index }: { chapter: Chapter; index: number }) {
             </div>
           )}
           {chapter.kicker && (
-            <p className="text-white/50 text-sm lg:text-base mt-5 tracking-wide max-w-md">
+            <p className="text-napoleon-ink/50 text-sm lg:text-base mt-5 tracking-wide max-w-md">
               {chapter.kicker}
             </p>
           )}
@@ -185,12 +185,12 @@ function ChapterSlide({ chapter, index }: { chapter: Chapter; index: number }) {
             <div className="h-px w-10 bg-napoleon-gold-dark" />
           </div>
           <h3
-            className="font-serif text-white leading-tight tracking-tight mb-5"
+            className="font-serif text-napoleon-ink leading-tight tracking-tight mb-5"
             style={{ fontSize: "clamp(1.5rem, 2.6vw, 2.25rem)" }}
           >
             {chapter.title}
           </h3>
-          <p className="text-white/55 text-base leading-relaxed max-w-md">
+          <p className="text-napoleon-ink/55 text-base leading-relaxed max-w-md">
             {chapter.body}
           </p>
         </div>

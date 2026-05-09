@@ -38,30 +38,30 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 55%, rgba(41,17,191,0.32) 0%, rgba(110,92,246,0.08) 35%, transparent 70%)",
+            "radial-gradient(ellipse 70% 60% at 50% 55%, rgba(58,90,156,0.10) 0%, rgba(125,164,211,0.05) 35%, transparent 70%)",
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none ambient-orb"
         style={{
           background:
-            "radial-gradient(circle 40% at 70% 35%, rgba(52,176,255,0.08) 0%, transparent 60%)",
+            "radial-gradient(circle 40% at 70% 35%, rgba(201,166,74,0.06) 0%, transparent 60%)",
         }}
       />
 
       {/* Grain overlay */}
-      <div className="absolute inset-0 grain-overlay opacity-[0.15] pointer-events-none mix-blend-overlay" />
+      <div className="absolute inset-0 grain-overlay opacity-[0.04] pointer-events-none" />
 
       {/* Emblem watermark — smaller, pushed down, only Y parallax */}
       <motion.div
         className="absolute left-0 right-0 flex items-center justify-center pointer-events-none"
         style={{ y: emblemY, top: "18%", bottom: "8%" }}
         initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 0.08, scale: 1 }}
+        animate={{ opacity: 0.18, scale: 1 }}
         transition={{ duration: 2.2, delay: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
       >
         <Image
-          src="/logos/napoleon-embleme-negatif.png"
+          src="/logos/napoleon-embleme-clean.svg"
           alt=""
           width={620}
           height={620}
@@ -75,7 +75,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center pt-32 pb-16">
         {/* Tagline */}
         <motion.h1
-          className="font-serif text-white leading-[1.02] tracking-tight drop-shadow-[0_4px_40px_rgba(0,0,0,0.9)]"
+          className="font-serif text-napoleon-ink leading-[1.02] tracking-tight"
           style={{ fontSize: "clamp(2.75rem, 7vw, 6rem)" }}
           initial="hidden"
           animate="visible"
@@ -133,7 +133,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 2.2 }}
         >
           <a href="#beta">
-            <Button className="bg-napoleon-deep hover:bg-napoleon-deep/90 text-white px-9 py-6 text-base font-medium rounded-full border border-white/10 shadow-[0_0_50px_rgba(41,17,191,0.55)]">
+            <Button className="bg-napoleon-deep hover:bg-napoleon-deep/90 text-white px-9 py-6 text-base font-medium rounded-full border border-napoleon-ink/10 shadow-[0_8px_40px_rgba(58,90,156,0.32)]">
               Rejoindre la bêta
             </Button>
           </a>
@@ -141,7 +141,7 @@ export function Hero() {
       </div>
 
       {/* Bottom fade to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-napoleon-warm via-napoleon-black/80 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-napoleon-warm to-transparent pointer-events-none" />
     </section>
   );
 }

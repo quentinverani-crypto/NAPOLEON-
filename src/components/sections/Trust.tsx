@@ -29,7 +29,7 @@ const signals = [
 export function Trust() {
   return (
     <section className="relative bg-napoleon-warm py-24 lg:py-28 overflow-hidden">
-      <div className="absolute inset-0 grain-overlay opacity-[0.06] pointer-events-none" />
+      <div className="absolute inset-0 grain-overlay opacity-[0.02] pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="h-px bg-gradient-to-r from-transparent via-napoleon-gold-dark/35 to-transparent mb-16" />
@@ -40,13 +40,13 @@ export function Trust() {
               <div key={signal.label} className="text-center lg:text-left">
                 <signal.icon
                   size={30}
-                  className="text-napoleon-gold mx-auto lg:mx-0 mb-5"
+                  className="text-napoleon-gold-dark mx-auto lg:mx-0 mb-5"
                   strokeWidth={1.4}
                 />
-                <p className="text-white font-medium text-sm lg:text-base tracking-wide">
+                <p className="text-napoleon-ink font-medium text-sm lg:text-base tracking-wide">
                   {signal.label}
                 </p>
-                <p className="text-white/40 text-xs mt-1.5">{signal.sublabel}</p>
+                <p className="text-napoleon-ink/40 text-xs mt-1.5">{signal.sublabel}</p>
               </div>
             ))}
           </div>
