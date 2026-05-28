@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-type LogoVariant = "horizontal" | "vertical" | "emblem";
+type LogoVariant = "horizontal" | "vertical" | "emblem" | "emblem-gold";
 
 export function Logo({
-  variant = "horizontal",
+  variant = "emblem",
   className = "",
   width = 160,
   height = 48,
@@ -16,16 +16,14 @@ export function Logo({
   priority?: boolean;
 }) {
   const src =
-    variant === "emblem"
-      ? "/logos/napoleon-embleme-clean.svg"
-      : variant === "vertical"
-        ? "/logos/napoleon-embleme.png"
-        : "/logos/napoleon-embleme.png";
+    variant === "emblem-gold"
+      ? "/logos/napoleon-emblem-v2-gold.png"
+      : "/logos/napoleon-emblem-v2-navy.png";
 
   return (
     <Image
       src={src}
-      alt="NAPOLEON Medical"
+      alt="NAPOLEON Médical"
       width={width}
       height={height}
       className={className}

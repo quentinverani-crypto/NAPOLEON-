@@ -69,7 +69,7 @@ export function Problem() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 30% 50%, rgba(58,90,156,0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 30% 50%, rgba(31,49,72,0.06) 0%, transparent 70%)",
           }}
         />
         <div className="absolute inset-0 grain-overlay opacity-[0.03] pointer-events-none" />

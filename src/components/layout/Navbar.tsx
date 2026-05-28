@@ -25,14 +25,17 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-6 flex items-center justify-between h-16 lg:h-20">
         <a href="#" className="relative z-10 flex items-center gap-3">
           <Logo variant="emblem" width={42} height={42} priority className="h-9 w-auto" />
-          <span className="font-serif text-napoleon-ink text-lg lg:text-xl tracking-tight leading-none">
+          <span
+            className="text-napoleon-ink text-lg lg:text-xl tracking-tight leading-none"
+            style={{ fontFamily: '"Georgia", "Times New Roman", serif' }}
+          >
             NAPOLEON{" "}
-            <span className="text-napoleon-gold-dark italic">Médical</span>
+            <span className="text-napoleon-gold-dark">Médical</span>
           </span>
         </a>
 
         <a href="#beta">
-          <Button className="bg-napoleon-deep hover:bg-napoleon-deep/90 text-white px-5 h-10 text-sm font-medium rounded-full shadow-[0_4px_20px_rgba(58,90,156,0.25)]">
+          <Button className="bg-napoleon-deep hover:bg-napoleon-deep/90 text-white px-5 h-10 text-sm font-medium rounded-full shadow-[0_4px_20px_rgba(31,49,72,0.25)]">
             Rejoindre la bêta
           </Button>
         </a>

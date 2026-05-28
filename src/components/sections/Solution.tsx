@@ -1,6 +1,6 @@
 "use client";
 
-import { Layers, ShieldCheck, Sparkles } from "lucide-react";
+import { Fingerprint, ShieldCheck, Heart } from "lucide-react";
 import {
   StaggerChildren,
   StaggerItem,
@@ -9,13 +9,13 @@ import { SlideUp } from "@/components/motion/SlideUp";
 
 const cards = [
   {
-    icon: Layers,
+    icon: Fingerprint,
     iconColor: "text-napoleon-deep",
     iconBg: "bg-gradient-to-br from-napoleon-deep/15 to-napoleon-light/10",
     hoverBorder: "hover:border-napoleon-deep/30",
-    title: "Simplicité & modularité",
+    title: "Traçabilité",
     body:
-      "Conçus pour être simple, intuitive et adaptative. Une interface qui s'ajuste à votre pratique — pas l'inverse.",
+      "Des données infalsifiables grâce à la technologie blockchain.",
   },
   {
     icon: ShieldCheck,
@@ -24,16 +24,16 @@ const cards = [
     hoverBorder: "hover:border-napoleon-deep/30",
     title: "Souveraineté",
     body:
-      "IA française, hébergée en France. Respect des normes réglementaires les plus strictes.",
+      "Respect des normes réglementaires les plus strictes. Une IA française hébergée en France dans des datacenters français.",
   },
   {
-    icon: Sparkles,
+    icon: Heart,
     iconColor: "text-napoleon-gold-dark",
     iconBg: "bg-gradient-to-br from-napoleon-gold/20 to-napoleon-gold-dark/10",
     hoverBorder: "hover:border-napoleon-gold/35",
-    title: "Liberté",
+    title: "Humanité",
     body:
-      "En automatisant les tâches chronophages, Napoléon libère du temps médical et redonne de la sérénité au quotidien.",
+      "Remet l'écoute et le regard au centre de la consultation. Quand la technologie renforce les liens humains.",
   },
 ];
 
@@ -41,17 +41,22 @@ export function Solution() {
   return (
     <section
       id="solution"
-      className="relative bg-napoleon-warm-deep py-28 lg:py-40 overflow-hidden"
+      className="relative py-28 lg:py-40 overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(to bottom, #f3ebd9 0%, #f3ebd9 35%, #f6f0df 55%, #faf5e8 70%, #fcf8ee 80%, #fefcf6 90%, #ffffff 100%)",
+      }}
     >
       {/* Ambient */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 80% 30%, rgba(58,90,156,0.05) 0%, transparent 60%)",
+            "radial-gradient(ellipse 80% 50% at 80% 30%, rgba(31,49,72,0.05) 0%, transparent 60%)",
         }}
       />
       <div className="absolute inset-0 grain-overlay opacity-[0.03] pointer-events-none" />
+
 
       <div className="relative mx-auto max-w-7xl px-6">
         <SlideUp>
@@ -65,9 +70,10 @@ export function Solution() {
         </SlideUp>
 
         <SlideUp delay={0.15}>
-          <p className="mt-8 text-napoleon-ink/55 text-base lg:text-lg max-w-xl leading-relaxed">
-            Une plateforme française, souveraine et pensée par des médecins —
-            pour replacer la médecine au cœur de la consultation.
+          <p className="mt-8 text-napoleon-ink/55 text-base lg:text-lg max-w-2xl leading-relaxed">
+            Une plateforme pensée par des médecins — pour replacer la médecine
+            au cœur de la consultation. Conçue pour être intuitive, accessible
+            et adaptative. Une interface qui s&apos;ajuste, pas l&apos;inverse.
           </p>
         </SlideUp>
 
@@ -81,7 +87,7 @@ export function Solution() {
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                   style={{
                     background:
-                      "radial-gradient(circle at 30% 20%, rgba(58,90,156,0.05) 0%, transparent 60%)",
+                      "radial-gradient(circle at 30% 20%, rgba(31,49,72,0.05) 0%, transparent 60%)",
                   }}
                 />
                 <div className="relative">

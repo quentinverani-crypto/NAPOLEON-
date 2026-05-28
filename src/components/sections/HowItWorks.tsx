@@ -17,9 +17,9 @@ const steps: Step[] = [
       <Image
         src="/logos/napoleon-mic-emblem.png"
         alt=""
-        width={96}
-        height={96}
-        className="w-[96px] h-[96px] object-contain"
+        width={120}
+        height={120}
+        className="w-[120px] h-[120px] object-contain"
         aria-hidden="true"
       />
     ),
@@ -28,13 +28,13 @@ const steps: Step[] = [
       "Parlez. Consultez. Examinez.\nNAPOLÉON Médical se charge du reste.",
   },
   {
-    render: () => <ChipEmblem className="w-[72px] h-[72px]" />,
+    render: () => <ChipEmblem className="w-[92px] h-[92px]" />,
     title: "Analyse IA",
     description:
       "La parole est analysée, structurée et transformée en données médicales exploitables.",
   },
   {
-    render: () => <DocumentEmblem className="w-[72px] h-[72px]" />,
+    render: () => <DocumentEmblem className="w-[92px] h-[92px]" />,
     title: "Documents générés",
     description:
       "Dossier médical, comptes rendus, ordonnances — tout est généré automatiquement.",
@@ -61,7 +61,7 @@ export function HowItWorks() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(58,90,156,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(31,49,72,0.06) 0%, transparent 70%)",
         }}
       />
       <div className="absolute inset-0 grain-overlay opacity-[0.03] pointer-events-none" />
@@ -96,7 +96,7 @@ export function HowItWorks() {
         {/* Timeline */}
         <div className="mt-24 relative">
           {/* Desktop: horizontal line */}
-          <div className="hidden lg:block absolute top-[40px] left-[12%] right-[12%] h-px bg-napoleon-ink/10">
+          <div className="hidden lg:block absolute top-[52px] left-[12%] right-[12%] h-px bg-napoleon-ink/10">
             <motion.div
               className="h-full bg-gradient-to-r from-napoleon-deep via-napoleon-light to-napoleon-gold origin-left"
               style={{ scaleX: lineProgress }}

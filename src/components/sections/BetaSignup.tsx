@@ -59,7 +59,7 @@ export function BetaSignup() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 80% 50%, rgba(58,90,156,0.07) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at 80% 50%, rgba(31,49,72,0.07) 0%, transparent 70%)",
         }}
       />
       <div className="absolute inset-0 grain-overlay opacity-[0.03] pointer-events-none" />
@@ -84,8 +84,8 @@ export function BetaSignup() {
 
               <p className="text-napoleon-ink/55 leading-relaxed max-w-md text-base lg:text-lg">
                 Nous recherchons {TOTAL_SPOTS}&nbsp;médecins pionniers pour
-                tester Napoléon et contribuer à construire l&apos;assistant
-                médical de demain.
+                tester NAPOLEON Médical et contribuer à construire
+                l&apos;assistant médical de demain.
               </p>
 
               <ul className="space-y-4">
