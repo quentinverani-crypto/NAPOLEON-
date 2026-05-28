@@ -95,8 +95,8 @@ export function HowItWorks() {
 
         {/* Timeline */}
         <div className="mt-24 relative">
-          {/* Desktop: horizontal line */}
-          <div className="hidden lg:block absolute top-[52px] left-[12%] right-[12%] h-px bg-napoleon-ink/10">
+          {/* Desktop: horizontal line — aligned on the icons' vertical center (60px) */}
+          <div className="hidden lg:block absolute top-[60px] left-[12%] right-[12%] h-px bg-napoleon-ink/10">
             <motion.div
               className="h-full bg-gradient-to-r from-napoleon-deep via-napoleon-light to-napoleon-gold origin-left"
               style={{ scaleX: lineProgress }}
@@ -117,10 +117,12 @@ export function HowItWorks() {
                   ease: [0.2, 0.8, 0.2, 1],
                 }}
               >
-                {/* Branded emblem badge */}
-                <div className="relative z-10 flex items-center justify-center">
+                {/* Branded emblem badge — fixed 120px box, icon centered inside */}
+                <div className="relative z-10 h-[120px] w-[120px] flex items-center justify-center">
                   <div className="absolute inset-0 -m-3 rounded-full bg-napoleon-deep/10 blur-2xl" />
-                  <div className="relative">{step.render()}</div>
+                  <div className="relative flex items-center justify-center">
+                    {step.render()}
+                  </div>
                 </div>
 
                 <h3 className="font-serif text-napoleon-ink text-2xl lg:text-3xl mt-8 mb-4 tracking-tight">
