@@ -182,7 +182,6 @@ function ChapterSlide({ chapter, index }: { chapter: Chapter; index: number }) {
             <span className="text-napoleon-gold/70 text-[11px] uppercase tracking-[0.3em] font-mono">
               0{index + 1}
             </span>
-            <div className="h-px w-10 bg-napoleon-gold-dark" />
           </div>
           <h3
             className="font-serif text-napoleon-ink leading-tight tracking-tight mb-5"
