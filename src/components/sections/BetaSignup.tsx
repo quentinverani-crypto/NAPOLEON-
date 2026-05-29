@@ -34,7 +34,9 @@ export function BetaSignup() {
 
     const form = e.currentTarget;
     const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      firstName: (form.elements.namedItem("firstName") as HTMLInputElement)
+        .value,
+      lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
       profession,
@@ -121,17 +123,31 @@ export function BetaSignup() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-napoleon-ink/60 text-sm">
-                      Nom et prénom
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      required
-                      placeholder="Dr. Jean Dupont"
-                      className="bg-napoleon-ink/5 border-napoleon-ink/10 text-napoleon-ink placeholder:text-napoleon-ink/20 h-11 rounded-lg focus:border-napoleon-gold/50 focus:ring-napoleon-gold/20"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName" className="text-napoleon-ink/60 text-sm">
+                        Prénom
+                      </Label>
+                      <Input
+                        id="firstName"
+                        name="firstName"
+                        required
+                        placeholder="Jean"
+                        className="bg-napoleon-ink/5 border-napoleon-ink/10 text-napoleon-ink placeholder:text-napoleon-ink/20 h-11 rounded-lg focus:border-napoleon-gold/50 focus:ring-napoleon-gold/20"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName" className="text-napoleon-ink/60 text-sm">
+                        Nom
+                      </Label>
+                      <Input
+                        id="lastName"
+                        name="lastName"
+                        required
+                        placeholder="Dupont"
+                        className="bg-napoleon-ink/5 border-napoleon-ink/10 text-napoleon-ink placeholder:text-napoleon-ink/20 h-11 rounded-lg focus:border-napoleon-gold/50 focus:ring-napoleon-gold/20"
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-2">

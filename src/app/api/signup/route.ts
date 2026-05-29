@@ -12,18 +12,31 @@ const PROFESSION_LABELS: Record<string, string> = {
 };
 
 type SignupBody = {
-  name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   phone?: string;
   profession?: string;
 };
 
+/** Diagnostic endpoint: GET /api/signup → indique l'état de la config sans exposer les secrets */
+export async function GET() {
+  return NextResponse.json({
+    notionTokenPresent: Boolean(process.env.NOTION_TOKEN),
+    notionDatabaseIdPresent: Boolean(process.env.NOTION_DATABASE_ID),
+    notionDatabaseIdPreview: process.env.NOTION_DATABASE_ID
+      ? `${process.env.NOTION_DATABASE_ID.slice(0, 8)}…${process.env.NOTION_DATABASE_ID.slice(-4)}`
+      : null,
+    runtime: "nodejs",
+  });
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as SignupBody;
-    const { name, email, phone, profession } = body;
+    const { firstName, lastName, email, phone, profession } = body;
 
-    if (!name || !email || !profession) {
+    if (!firstName || !lastName || !email || !profession) {
       return NextResponse.json(
         { error: "Champs requis manquants" },
         { status: 400 }
@@ -35,16 +48,30 @@ export async function POST(request: Request) {
 
     if (!NOTION_TOKEN || !NOTION_DATABASE_ID) {
       console.warn(
-        "[signup] Variables Notion absentes — l'inscription est journalisée mais pas persistée."
+        "[signup] Variables Notion absentes",
+        JSON.stringify({
+          hasToken: Boolean(NOTION_TOKEN),
+          hasDbId: Boolean(NOTION_DATABASE_ID),
+        })
       );
-      console.log("[signup]", { name, email, phone, profession });
+      console.log("[signup] payload reçu:", {
+        firstName,
+        lastName,
+        email,
+        phone,
+        profession,
+      });
       return NextResponse.json({ success: true, persisted: false });
     }
 
     const professionLabel = PROFESSION_LABELS[profession] ?? profession;
 
     const properties: Record<string, unknown> = {
-      Nom: { title: [{ text: { content: name } }] },
+      // TITLE column = Prénom dans la nouvelle base
+      Prénom: { title: [{ text: { content: firstName } }] },
+      "Nom de famille": {
+        rich_text: [{ text: { content: lastName } }],
+      },
       Email: { email },
       Profession: { select: { name: professionLabel } },
       Statut: { select: { name: "Nouveau" } },
