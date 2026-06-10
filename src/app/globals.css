@@ -136,3 +136,99 @@
 .grain-overlay {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' /%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+/* =========================================================================
+   SITE VITRINE COMMERCIAL — NAPOLEON Médical (phase 2)
+   Ajout strictement additif. Tokens préfixés `nap-` + `font-news` / `font-body`.
+   Charte graphique 2026 appliquée à la lettre.
+   ========================================================================= */
+@theme inline {
+  /* Typographie vitrine */
+  --font-news: var(--font-newsreader), "Newsreader", Georgia, serif;
+  --font-body: var(--font-manrope), "Manrope", system-ui, sans-serif;
+
+  /* Palette officielle — aucune autre teinte autorisée */
+  --color-nap-blue: #5478a8;            /* Bleu Napoléon — structure, titres */
+  --color-nap-ink: #1a2540;             /* Bleu Nuit (Ink) — autorité, fonds sombres */
+  --color-nap-deep: #1f3a6b;            /* Bleu Profond — CTA forts */
+  --color-nap-gold: #dfb670;            /* Doré Médical — or rare, en touche */
+  --color-nap-terracotta: #d77962;      /* Terracotta — accent éditorial */
+  --color-nap-terracotta-deep: #b85a45; /* Terracotta Deep — emphase italique */
+  --color-nap-paper: #ffffff;           /* Paper — cartes, surfaces */
+  --color-nap-canvas: #fafbfc;          /* Canvas — fond général */
+  --color-nap-ivory: #f3f1ec;           /* Ivoire — fond chaud, respirations */
+  --color-nap-inksoft: #4a5670;         /* Ink Soft — texte courant */
+  --color-nap-muted: #9aa0ab;           /* Muted — texte secondaire */
+  --color-nap-border: #e5e7eb;          /* Border — filets, bordures */
+}
+
+/* Eyebrow / surtitre : Manrope capitales très espacées (façon document officiel) */
+.nap-eyebrow {
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Balayage doré 70° au survol des boutons (signature impériale) */
+.nap-sweep { position: relative; overflow: hidden; isolation: isolate; }
+.nap-sweep::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(223, 182, 112, 0.55) 50%,
+    transparent 62%
+  );
+  transform: translateX(-130%) skewX(-20deg);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+.nap-sweep:hover::after,
+.nap-sweep:focus-visible::after { transform: translateX(130%) skewX(-20deg); }
+.nap-sweep > * { position: relative; z-index: 2; }
+
+/* Filet décoratif or à 70° (jamais plus d'un par écran) */
+.nap-filet-70 {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(223, 182, 112, 0.55),
+    transparent
+  );
+  transform: rotate(20deg); /* 70° depuis l'horizontale */
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Séparateur diagonal subtil entre sections (clip-path incliné) */
+.nap-clip-diag-top { clip-path: polygon(0 4.5vw, 100% 0, 100% 100%, 0 100%); }
+.nap-clip-diag-bottom { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4.5vw), 0 100%); }
+
+/* Reveal diagonal 70° : voile qui balaie le contenu à l'apparition */
+@keyframes nap-blade-sweep {
+  0% { transform: translateX(-60%) skewX(-20deg); opacity: 0; }
+  35% { opacity: 1; }
+  100% { transform: translateX(180%) skewX(-20deg); opacity: 0; }
+}
+
+/* Liseré or fin, statique */
+.nap-hairline-gold {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(223, 182, 112, 0.7),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nap-sweep::after { display: none; }
+}
