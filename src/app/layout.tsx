@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { figtree, gfsDidot } from "@/lib/fonts";
+import { figtree, gfsDidot, newsreader, manrope } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${figtree.variable} ${gfsDidot.variable} h-full antialiased`}
+      className={`${figtree.variable} ${gfsDidot.variable} ${newsreader.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-napoleon-black text-napoleon-ink">
         {children}
