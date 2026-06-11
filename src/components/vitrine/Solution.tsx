@@ -71,22 +71,23 @@ export function Solution() {
             aria-hidden
           />
 
-          <ol className="space-y-5">
+          <ol className="space-y-6">
             {STEPS.map((s, i) => (
               <motion.li
                 key={s.n}
-                initial={{ opacity: 0, y: 22 }}
+                initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-15%" }}
-                transition={{ duration: 0.6, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.7, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                 className="relative flex gap-5 sm:gap-7"
               >
-                <div className="relative z-10 flex h-14 w-14 flex-none items-center justify-center rounded-full border border-nap-border bg-nap-paper sm:h-16 sm:w-16">
-                  <span className="font-news text-lg text-nap-gold sm:text-xl">
+                <div className="relative z-10 flex h-14 w-14 flex-none items-center justify-center border border-nap-border bg-nap-paper sm:h-16 sm:w-16">
+                  <span className="font-news text-lg tabular-nums text-nap-gold sm:text-xl">
                     {s.n}
                   </span>
                 </div>
-                <div className="flex-1 rounded-2xl border border-nap-border bg-nap-paper px-6 py-5 shadow-[0_18px_40px_-28px_rgba(26,37,64,0.35)] sm:px-8 sm:py-6">
+                <div className="flex-1 border border-nap-border bg-nap-paper px-6 py-5 sm:px-8 sm:py-6">
+                  <span className="nap-hairline-gold mb-4 block h-px w-10" aria-hidden />
                   <h3 className="font-news text-xl text-nap-ink sm:text-2xl">
                     {s.title}
                   </h3>

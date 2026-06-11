@@ -1,15 +1,18 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/* Surtitre / eyebrow — Manrope capitales très espacées, façon document officiel. */
+/* Surtitre / eyebrow — Manrope capitales très espacées, façon document officiel,
+   posé sur un court filet. */
 export function Eyebrow({
   children,
   className,
   tone = "terracotta",
+  rule = true,
 }: {
   children: ReactNode;
   className?: string;
   tone?: "terracotta" | "gold" | "muted" | "ivory" | "blue";
+  rule?: boolean;
 }) {
   const tones: Record<string, string> = {
     terracotta: "text-nap-terracotta",
@@ -18,10 +21,31 @@ export function Eyebrow({
     ivory: "text-nap-ivory/70",
     blue: "text-nap-blue",
   };
-  return <p className={cn("nap-eyebrow", tones[tone], className)}>{children}</p>;
+  const rules: Record<string, string> = {
+    terracotta: "bg-nap-terracotta/60",
+    gold: "bg-nap-gold/70",
+    muted: "bg-nap-muted/60",
+    ivory: "bg-nap-ivory/40",
+    blue: "bg-nap-blue/50",
+  };
+  return (
+    <p
+      className={cn(
+        "nap-eyebrow inline-flex items-center gap-4",
+        tones[tone],
+        className,
+      )}
+    >
+      {rule && (
+        <span aria-hidden className={cn("h-px w-10", rules[tone])} />
+      )}
+      <span>{children}</span>
+    </p>
+  );
 }
 
-/* CTA unique du site : « Demander une démo ». Balayage doré 70° au survol. */
+/* CTA unique du site : « Demander une démo ». Rectangle net, capitales
+   espacées, balayage doré 70° au survol — l'imprimé officiel, pas la pilule. */
 export function DemoButton({
   href = "#demo",
   children = "Demander une démo",
@@ -35,7 +59,7 @@ export function DemoButton({
 }) {
   const variants: Record<string, string> = {
     primary:
-      "bg-nap-deep text-white hover:bg-nap-ink shadow-[0_10px_30px_-12px_rgba(31,58,107,0.6)]",
+      "bg-nap-deep text-white hover:bg-nap-ink",
     goldline:
       "border border-nap-gold text-nap-gold hover:bg-nap-gold/10",
   };
@@ -43,7 +67,7 @@ export function DemoButton({
     <a
       href={href}
       className={cn(
-        "nap-sweep inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
+        "nap-btn nap-sweep inline-flex items-center justify-center gap-2 px-8 py-4 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
         variants[variant],
         className,
       )}

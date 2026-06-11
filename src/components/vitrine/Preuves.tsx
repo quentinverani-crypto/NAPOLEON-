@@ -32,7 +32,8 @@ export function Preuves() {
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {STUDIES.map((s, i) => (
             <Reveal key={i} delay={i * 0.1} className="h-full">
-              <article className="flex h-full flex-col rounded-2xl border border-nap-border bg-nap-paper p-8 shadow-[0_18px_40px_-30px_rgba(26,37,64,0.4)]">
+              <article className="flex h-full flex-col border border-nap-border bg-nap-paper p-8 sm:p-9">
+                <span className="nap-hairline-gold mb-6 block h-px w-12" aria-hidden />
                 <span className="nap-eyebrow text-nap-gold">{s.tag}</span>
                 <p className="mt-5 font-body text-lg leading-relaxed text-nap-inksoft">
                   {s.body}

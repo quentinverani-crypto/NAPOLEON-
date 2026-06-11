@@ -119,18 +119,25 @@ export function Constat() {
           </motion.p>
         </motion.div>
 
-        {/* Trois chiffres, révélés un à un */}
+        {/* Trois chiffres, révélés un à un — composition décalée, façon
+            relevés d'un document officiel */}
         <div className="mt-[14vh] space-y-[12vh]">
           {STATS.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 36 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-18%" }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-3xl"
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className={i % 2 === 1 ? "ml-auto max-w-3xl" : "max-w-3xl"}
             >
-              <p className="font-news font-medium leading-none text-nap-gold text-[clamp(3rem,11vw,7rem)]">
+              <div className="flex items-baseline gap-5">
+                <span className="font-news text-sm tabular-nums tracking-[0.3em] text-nap-gold/70">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="nap-hairline-gold h-px w-16" aria-hidden />
+              </div>
+              <p className="mt-5 font-news font-medium leading-none text-nap-gold text-[clamp(3rem,11vw,7rem)]">
                 {s.figure}
               </p>
               <p className="mt-4 max-w-xl font-body text-base text-nap-ivory/75 sm:text-lg">

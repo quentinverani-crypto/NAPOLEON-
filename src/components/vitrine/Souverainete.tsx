@@ -21,7 +21,10 @@ const VALUES = [
 
 export function Souverainete() {
   return (
-    <section id="souverainete" className="bg-nap-ivory py-28 sm:py-36">
+    <section
+      id="souverainete"
+      className="nap-clip-diag-top nap-grain -mt-[4.5vw] bg-nap-ivory pb-28 pt-[calc(7rem+4.5vw)] sm:pb-36 sm:pt-[calc(9rem+4.5vw)]"
+    >
       <div className="mx-auto max-w-5xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <Reveal>
@@ -41,7 +44,7 @@ export function Souverainete() {
         </div>
 
         {/* Triptyque des valeurs */}
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-nap-border bg-nap-border sm:grid-cols-3">
+        <div className="mt-16 grid gap-px border border-nap-border bg-nap-border sm:grid-cols-3">
           {VALUES.map((v, i) => (
             <Reveal key={v.title} delay={i * 0.08} className="h-full">
               <div className="flex h-full flex-col bg-nap-paper px-7 py-9">

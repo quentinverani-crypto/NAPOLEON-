@@ -63,9 +63,13 @@ export function Nav({ show }: { show: boolean }) {
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="text-sm text-nap-inksoft transition-colors hover:text-nap-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep rounded-sm"
+                    className="group relative pb-1 text-sm text-nap-inksoft transition-colors hover:text-nap-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep"
                   >
                     {l.label}
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-nap-gold transition-transform duration-300 group-hover:scale-x-100"
+                    />
                   </a>
                 </li>
               ))}
@@ -74,7 +78,7 @@ export function Nav({ show }: { show: boolean }) {
             <div className="flex items-center gap-2">
               <a
                 href="#demo"
-                className="nap-sweep hidden rounded-full bg-nap-deep px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-nap-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep focus-visible:ring-offset-2 sm:inline-flex"
+                className="nap-btn nap-sweep hidden bg-nap-deep px-5 py-2.5 text-white transition-colors hover:bg-nap-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep focus-visible:ring-offset-2 sm:inline-flex"
               >
                 Demander une démo
               </a>
@@ -121,7 +125,7 @@ export function Nav({ show }: { show: boolean }) {
                       <a
                         href={l.href}
                         onClick={() => setOpen(false)}
-                        className="block rounded-lg px-3 py-2.5 text-sm text-nap-inksoft hover:bg-nap-ivory hover:text-nap-ink"
+                        className="block px-3 py-2.5 text-sm text-nap-inksoft hover:bg-nap-ivory hover:text-nap-ink"
                       >
                         {l.label}
                       </a>
@@ -131,7 +135,7 @@ export function Nav({ show }: { show: boolean }) {
                     <a
                       href="#demo"
                       onClick={() => setOpen(false)}
-                      className="block rounded-full bg-nap-deep px-5 py-3 text-center text-sm font-semibold text-white"
+                      className="nap-btn block bg-nap-deep px-5 py-3 text-center text-white"
                     >
                       Demander une démo
                     </a>

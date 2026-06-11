@@ -2,12 +2,14 @@
 
 import { motion, useReducedMotion } from "motion/react";
 
-const W = 320;
-const H = 64;
+export const WAVE_W = 320;
+export const WAVE_H = 64;
+const W = WAVE_W;
+const H = WAVE_H;
 
 /** Construit un tracé d'onde lisse à partir d'amplitudes — structure constante
  *  pour permettre le morphing fluide d'un état à l'autre. */
-function wavePath(amps: number[]): string {
+export function wavePath(amps: number[]): string {
   const mid = H / 2;
   const seg = W / (amps.length - 1);
   let d = `M0,${(mid - amps[0]).toFixed(2)}`;
@@ -23,9 +25,10 @@ function wavePath(amps: number[]): string {
 }
 
 // Deux « respirations » distinctes, comme une phrase parlée.
-const FRAME_A = [0, 4, 11, 5, 14, 6, 2, 9, 16, 7, 3, 8, 2, 5, 0];
-const FRAME_B = [0, 7, 3, 13, 6, 10, 18, 4, 8, 14, 5, 11, 4, 6, 0];
-const FRAME_C = [0, 3, 9, 6, 11, 16, 5, 13, 7, 3, 12, 6, 9, 4, 0];
+export const FRAME_FLAT = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+export const FRAME_A = [0, 4, 11, 5, 14, 6, 2, 9, 16, 7, 3, 8, 2, 5, 0];
+export const FRAME_B = [0, 7, 3, 13, 6, 10, 18, 4, 8, 14, 5, 11, 4, 6, 0];
+export const FRAME_C = [0, 3, 9, 6, 11, 16, 5, 13, 7, 3, 12, 6, 9, 4, 0];
 
 const PATHS = [
   wavePath(FRAME_A),

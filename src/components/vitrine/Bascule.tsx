@@ -65,7 +65,9 @@ export function Bascule() {
       gsap.set(q(".b-warm, .b-frame, .b-ray, .b-textB, .b-textC"), {
         opacity: 0,
       });
-      gsap.set(q(".b-textA"), { opacity: 1 });
+      gsap.set(q(".b-textA"), { opacity: 1, y: 0 });
+      gsap.set(q(".b-textB"), { y: 18 });
+      gsap.set(q(".b-textC"), { y: 18 });
       gsap.set(monitor, { xPercent: -50, transformOrigin: "center bottom" });
       gsap.set(chairR, { scaleX: -1 });
 
@@ -73,8 +75,8 @@ export function Bascule() {
         scrollTrigger: {
           trigger: scope.current,
           start: "top top",
-          end: "+=2600",
-          scrub: 0.6,
+          end: "+=2800",
+          scrub: 0.7,
           pin: true,
           anticipatePin: 1,
         },
@@ -83,21 +85,22 @@ export function Bascule() {
       tl.to(q(".b-warm"), { opacity: 1, duration: 0.42, ease: "none" }, 0.3)
         .to(
           monitor,
-          { scaleX: 0.16, scaleY: 0.34, yPercent: -120, duration: 0.32, ease: "power1.in" },
+          { scaleX: 0.16, scaleY: 0.34, yPercent: -120, duration: 0.32, ease: "power2.inOut" },
           0.3,
         )
         .to(q(".b-glow"), { opacity: 0, duration: 0.28, ease: "none" }, 0.3)
         .to(monitor, { opacity: 0, duration: 0.16 }, 0.46)
         .to(q(".b-frame"), { opacity: 1, duration: 0.2 }, 0.56)
         .to(q(".b-scrim"), { opacity: 0, duration: 0.12, ease: "none" }, 0.6)
-        .to(q(".b-chair-left"), { xPercent: 118, duration: 0.34, ease: "power1.inOut" }, 0.62)
-        .to(chairR, { xPercent: -118, duration: 0.34, ease: "power1.inOut" }, 0.62)
-        .to(q(".b-ray"), { opacity: 1, duration: 0.14 }, 0.74)
-        // Textes synchronisés
-        .to(q(".b-textA"), { opacity: 0, duration: 0.06 }, 0.24)
-        .to(q(".b-textB"), { opacity: 1, duration: 0.06 }, 0.34)
-        .to(q(".b-textB"), { opacity: 0, duration: 0.06 }, 0.58)
-        .to(q(".b-textC"), { opacity: 1, duration: 0.08 }, 0.7);
+        .to(q(".b-chair-left"), { xPercent: 118, duration: 0.34, ease: "power2.inOut" }, 0.6)
+        .to(chairR, { xPercent: -118, duration: 0.34, ease: "power2.inOut" }, 0.6)
+        .to(q(".b-ray"), { opacity: 1, duration: 0.16, ease: "none" }, 0.74)
+        // Textes synchronisés — chaque phrase monte en se posant, la
+        // précédente s'efface en s'élevant (continuité spatiale).
+        .to(q(".b-textA"), { opacity: 0, y: -16, duration: 0.07 }, 0.24)
+        .to(q(".b-textB"), { opacity: 1, y: 0, duration: 0.08 }, 0.33)
+        .to(q(".b-textB"), { opacity: 0, y: -16, duration: 0.07 }, 0.57)
+        .to(q(".b-textC"), { opacity: 1, y: 0, duration: 0.1 }, 0.68);
     },
     { scope, dependencies: [reduce] },
   );

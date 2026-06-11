@@ -74,7 +74,7 @@ export function CtaFinal() {
   return (
     <section
       id="demo"
-      className="relative overflow-hidden bg-nap-ink py-28 sm:py-36"
+      className="nap-clip-diag-top relative -mt-[4.5vw] overflow-hidden bg-nap-ink pb-28 pt-[calc(7rem+4.5vw)] sm:pb-36 sm:pt-[calc(9rem+4.5vw)]"
     >
       {/* Emblème or en filigrane très discret */}
       <div
@@ -117,15 +117,23 @@ export function CtaFinal() {
 
         {/* Formulaire */}
         <Reveal delay={0.1}>
-          <div className="rounded-3xl border border-white/10 bg-nap-paper p-7 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.6)] sm:p-9">
+          <div className="border border-nap-gold/25 bg-nap-paper p-7 sm:p-9">
             {status === "success" ? (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="py-10 text-center"
               >
-                <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-nap-gold text-nap-gold">
-                  ✓
+                <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center border border-nap-gold text-nap-gold">
+                  <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden>
+                    <path
+                      d="M1.5 7.5 6.3 12.3 16.5 1.8"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </div>
                 <p className="font-news text-2xl text-nap-ink">
                   Demande bien reçue.
@@ -208,7 +216,7 @@ export function CtaFinal() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="nap-sweep inline-flex w-full items-center justify-center rounded-full border border-nap-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-nap-gold transition-colors hover:bg-nap-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-gold disabled:opacity-60"
+                  className="nap-btn nap-sweep inline-flex w-full items-center justify-center border border-nap-gold px-7 py-4 text-nap-gold transition-colors hover:bg-nap-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-gold disabled:opacity-60"
                 >
                   {status === "loading" ? "Envoi…" : "Demander une démo"}
                 </button>
@@ -227,7 +235,7 @@ export function CtaFinal() {
 }
 
 const inputCls =
-  "w-full rounded-xl border border-nap-border bg-nap-canvas px-4 py-3 font-body text-nap-ink outline-none transition-colors placeholder:text-nap-muted focus:border-nap-deep focus:ring-2 focus:ring-nap-deep/20";
+  "w-full rounded-none border border-nap-border bg-nap-canvas px-4 py-3 font-body text-nap-ink outline-none transition-colors placeholder:text-nap-muted focus:border-nap-deep focus:ring-2 focus:ring-nap-deep/20";
 
 function Field({
   label,
