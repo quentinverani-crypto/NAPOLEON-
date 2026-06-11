@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "@/lib/gsap";
+import { useReducedMotion } from "./use-reduced-motion";
 
 /** Fauteuil stylisé (profil, esthétique galerie — aucun personnage humain). */
 function Chair({ className }: { className?: string }) {
@@ -24,7 +26,7 @@ const TEXT = {
   c: "Deux personnes. Une conversation. La médecine que vous avez choisie.",
 };
 
-/** Version reduced-motion / repli : même narration, trois temps en fondu simple. */
+/** Repli reduced-motion : même narration, trois temps présentés simplement. */
 function BasculeReduced() {
   const blocks = [
     { t: TEXT.a, sub: "Un moniteur s’interpose entre le médecin et le patient." },
@@ -36,18 +38,12 @@ function BasculeReduced() {
       <h2 className="sr-only">La bascule</h2>
       <div className="mx-auto max-w-3xl space-y-20 px-6 text-center">
         {blocks.map((b, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 0.6 }}
-          >
+          <div key={i}>
             <p className="font-news text-[clamp(1.8rem,5vw,3rem)] font-medium leading-tight text-nap-ivory">
               {b.t}
             </p>
             <p className="mt-4 font-body text-nap-muted">{b.sub}</p>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>
@@ -56,161 +52,152 @@ function BasculeReduced() {
 
 export function Bascule() {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
+  const scope = useRef<HTMLElement>(null);
 
-  // Lumière : froid → chaud (la base chaude se révèle par-dessus la froide).
-  const warmOpacity = useTransform(scrollYProgress, [0.3, 0.72], [0, 1]);
+  useGSAP(
+    () => {
+      if (!scope.current) return;
+      const q = gsap.utils.selector(scope);
+      const monitor = q(".b-monitor")[0];
+      const chairR = q(".b-chair-right")[0];
 
-  // Écran : s’amincit, s’élève, se fond dans le mur.
-  const mScaleX = useTransform(scrollYProgress, [0.3, 0.62], [1, 0.16]);
-  const mScaleY = useTransform(scrollYProgress, [0.3, 0.62], [1, 0.34]);
-  const mY = useTransform(scrollYProgress, [0.3, 0.62], ["0%", "-120%"]);
-  const mOpacity = useTransform(scrollYProgress, [0.46, 0.62], [1, 0]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.32, 0.58], [1, 1, 0]);
-  const frameOpacity = useTransform(scrollYProgress, [0.56, 0.76], [0, 1]);
+      // États initiaux.
+      gsap.set(q(".b-warm, .b-frame, .b-ray, .b-textB, .b-textC"), {
+        opacity: 0,
+      });
+      gsap.set(q(".b-textA"), { opacity: 1 });
+      gsap.set(monitor, { xPercent: -50, transformOrigin: "center bottom" });
+      gsap.set(chairR, { scaleX: -1 });
 
-  // Fauteuils : se rapprochent.
-  const leftX = useTransform(scrollYProgress, [0.62, 0.96], ["0%", "118%"]);
-  const rightX = useTransform(scrollYProgress, [0.62, 0.96], ["0%", "-118%"]);
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: scope.current,
+          start: "top top",
+          end: "+=2600",
+          scrub: 0.6,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
 
-  // Rai de lumière doré à 70°, en clôture.
-  const rayOpacity = useTransform(scrollYProgress, [0.74, 0.88], [0, 1]);
-
-  // Scrim haut pour la lisibilité des textes A/B sur fond mouvant.
-  const scrimOpacity = useTransform(scrollYProgress, [0, 0.62, 0.72], [0.4, 0.4, 0]);
-
-  const tA = useTransform(scrollYProgress, [0, 0.06, 0.24, 0.3], [0, 1, 1, 0]);
-  const tB = useTransform(
-    scrollYProgress,
-    [0.34, 0.42, 0.58, 0.64],
-    [0, 1, 1, 0],
+      tl.to(q(".b-warm"), { opacity: 1, duration: 0.42, ease: "none" }, 0.3)
+        .to(
+          monitor,
+          { scaleX: 0.16, scaleY: 0.34, yPercent: -120, duration: 0.32, ease: "power1.in" },
+          0.3,
+        )
+        .to(q(".b-glow"), { opacity: 0, duration: 0.28, ease: "none" }, 0.3)
+        .to(monitor, { opacity: 0, duration: 0.16 }, 0.46)
+        .to(q(".b-frame"), { opacity: 1, duration: 0.2 }, 0.56)
+        .to(q(".b-scrim"), { opacity: 0, duration: 0.12, ease: "none" }, 0.6)
+        .to(q(".b-chair-left"), { xPercent: 118, duration: 0.34, ease: "power1.inOut" }, 0.62)
+        .to(chairR, { xPercent: -118, duration: 0.34, ease: "power1.inOut" }, 0.62)
+        .to(q(".b-ray"), { opacity: 1, duration: 0.14 }, 0.74)
+        // Textes synchronisés
+        .to(q(".b-textA"), { opacity: 0, duration: 0.06 }, 0.24)
+        .to(q(".b-textB"), { opacity: 1, duration: 0.06 }, 0.34)
+        .to(q(".b-textB"), { opacity: 0, duration: 0.06 }, 0.58)
+        .to(q(".b-textC"), { opacity: 1, duration: 0.08 }, 0.7);
+    },
+    { scope, dependencies: [reduce] },
   );
-  const tC = useTransform(scrollYProgress, [0.7, 0.8, 1, 1], [0, 1, 1, 1]);
 
   if (reduce) return <BasculeReduced />;
 
   return (
-    <section ref={ref} id="bascule" className="relative h-[320vh] bg-nap-ink">
+    <section
+      ref={scope}
+      id="bascule"
+      className="relative h-[100svh] overflow-hidden bg-nap-ink"
+    >
       <h2 className="sr-only">La bascule</h2>
-      <div className="sticky top-0 h-[100svh] overflow-hidden">
-        {/* Base lumineuse froide (la prison de l’écran) */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(120% 90% at 50% 60%, #243150 0%, #1A2540 70%)",
-          }}
-          aria-hidden
-        />
-        {/* Base lumineuse chaude (la consultation réhumanisée) */}
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            opacity: warmOpacity,
-            background:
-              "radial-gradient(120% 95% at 50% 64%, #FBF6EA 0%, #F3F1EC 58%, #ECE6D8 100%)",
-          }}
-          aria-hidden
-        />
-        {/* Sol — marbre très doux */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-[34%]"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(255,255,255,0.06), transparent)",
-          }}
-          aria-hidden
-        />
 
-        {/* Cadre mural discret (ce que devient l’écran) */}
-        <motion.div
-          style={{ opacity: frameOpacity }}
-          className="absolute left-1/2 top-[15%] h-[12%] w-[16%] -translate-x-1/2 rounded-sm border border-nap-gold/40 bg-white/30"
-          aria-hidden
-        />
+      {/* Base froide (la prison de l’écran) */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 50% 60%, #243150 0%, #1A2540 70%)",
+        }}
+        aria-hidden
+      />
+      {/* Base chaude (la consultation réhumanisée) */}
+      <div
+        className="b-warm absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(120% 95% at 50% 64%, #FBF6EA 0%, #F3F1EC 58%, #ECE6D8 100%)",
+        }}
+        aria-hidden
+      />
+      {/* Sol — marbre doux */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[34%]"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(255,255,255,0.06), transparent)",
+        }}
+        aria-hidden
+      />
 
-        {/* Fauteuil gauche */}
-        <motion.div
-          style={{ x: leftX }}
-          className="absolute bottom-[20%] left-[7%] w-[clamp(96px,15vw,200px)]"
-          aria-hidden
-        >
-          <Chair className="h-auto w-full" />
-        </motion.div>
-        {/* Fauteuil droit (miroir) */}
-        <motion.div
-          style={{ x: rightX, scaleX: -1 }}
-          className="absolute bottom-[20%] right-[7%] w-[clamp(96px,15vw,200px)]"
-          aria-hidden
-        >
-          <Chair className="h-auto w-full" />
-        </motion.div>
+      {/* Cadre mural discret (ce que devient l’écran) */}
+      <div
+        className="b-frame absolute left-1/2 top-[15%] h-[12%] w-[16%] -translate-x-1/2 rounded-sm border border-nap-gold/40 bg-white/30"
+        aria-hidden
+      />
 
-        {/* Le moniteur sur pied, lueur froide #5478A8 */}
-        <motion.div
-          style={{
-            x: "-50%",
-            y: mY,
-            scaleX: mScaleX,
-            scaleY: mScaleY,
-            opacity: mOpacity,
-            transformOrigin: "center bottom",
-          }}
-          className="absolute bottom-[24%] left-1/2 flex flex-col items-center"
-          aria-hidden
-        >
-          <motion.div
-            style={{ opacity: glowOpacity }}
-            className="h-[20vh] max-h-[200px] w-[26vw] max-w-[300px] rounded-md"
-          >
-            <div className="h-full w-full rounded-md bg-[#5478A8] shadow-[0_0_80px_24px_rgba(84,120,168,0.55)]" />
-          </motion.div>
-          <div className="h-[8vh] max-h-[70px] w-[3px] bg-nap-blue/60" />
-          <div className="h-[6px] w-[14%] min-w-[60px] rounded-full bg-nap-blue/50" />
-        </motion.div>
+      {/* Fauteuils */}
+      <div
+        className="b-chair-left absolute bottom-[20%] left-[7%] w-[clamp(96px,15vw,200px)]"
+        aria-hidden
+      >
+        <Chair className="h-auto w-full" />
+      </div>
+      <div
+        className="b-chair-right absolute bottom-[20%] right-[7%] w-[clamp(96px,15vw,200px)]"
+        aria-hidden
+      >
+        <Chair className="h-auto w-full" />
+      </div>
 
-        {/* Rai de lumière doré à 70° */}
-        <motion.div
-          style={{ opacity: rayOpacity }}
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[160%] w-[2px] -translate-x-1/2 -translate-y-1/2 rotate-[20deg]"
-          aria-hidden
-        >
-          <div className="h-full w-full bg-gradient-to-b from-transparent via-nap-gold/70 to-transparent shadow-[0_0_12px_rgba(223,182,112,0.6)]" />
-        </motion.div>
+      {/* Moniteur sur pied, lueur froide #5478A8 */}
+      <div
+        className="b-monitor absolute bottom-[24%] left-1/2 flex flex-col items-center"
+        aria-hidden
+      >
+        <div className="b-glow h-[20vh] max-h-[200px] w-[26vw] max-w-[300px] rounded-md">
+          <div className="h-full w-full rounded-md bg-[#5478A8] shadow-[0_0_80px_24px_rgba(84,120,168,0.55)]" />
+        </div>
+        <div className="h-[8vh] max-h-[70px] w-[3px] bg-nap-blue/60" />
+        <div className="h-[6px] w-[14%] min-w-[60px] rounded-full bg-nap-blue/50" />
+      </div>
 
-        {/* Scrim haut */}
-        <motion.div
-          style={{ opacity: scrimOpacity }}
-          className="pointer-events-none absolute inset-x-0 top-0 h-[46%] bg-gradient-to-b from-nap-ink/80 to-transparent"
-          aria-hidden
-        />
+      {/* Rai de lumière doré à 70° */}
+      <div
+        className="b-ray pointer-events-none absolute left-1/2 top-1/2 h-[160%] w-[2px] -translate-x-1/2 -translate-y-1/2 rotate-[20deg]"
+        aria-hidden
+      >
+        <div className="h-full w-full bg-gradient-to-b from-transparent via-nap-gold/70 to-transparent shadow-[0_0_12px_rgba(223,182,112,0.6)]" />
+      </div>
 
-        {/* Textes synchronisés */}
-        <div className="absolute inset-x-0 top-[14%] flex justify-center px-6">
-          <div className="relative h-[30vh] w-full max-w-3xl text-center">
-            <motion.p
-              style={{ opacity: tA }}
-              className="absolute inset-x-0 top-0 font-news text-[clamp(1.8rem,5vw,3.2rem)] font-medium leading-tight text-nap-ivory drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]"
-            >
-              {TEXT.a}
-            </motion.p>
-            <motion.p
-              style={{ opacity: tB }}
-              className="absolute inset-x-0 top-0 font-news text-[clamp(2rem,6vw,3.8rem)] font-medium leading-tight text-nap-ivory drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]"
-            >
-              {TEXT.b}
-            </motion.p>
-            <motion.p
-              style={{ opacity: tC }}
-              className="absolute inset-x-0 top-0 mx-auto max-w-2xl font-news text-[clamp(1.6rem,4.4vw,2.8rem)] font-medium leading-tight text-nap-ink"
-            >
-              {TEXT.c}
-            </motion.p>
-          </div>
+      {/* Scrim haut */}
+      <div
+        className="b-scrim pointer-events-none absolute inset-x-0 top-0 h-[46%] bg-gradient-to-b from-nap-ink/80 to-transparent"
+        aria-hidden
+      />
+
+      {/* Textes synchronisés */}
+      <div className="absolute inset-x-0 top-[14%] flex justify-center px-6">
+        <div className="relative h-[30vh] w-full max-w-3xl text-center">
+          <p className="b-textA absolute inset-x-0 top-0 font-news text-[clamp(1.8rem,5vw,3.2rem)] font-medium leading-tight text-nap-ivory drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+            {TEXT.a}
+          </p>
+          <p className="b-textB absolute inset-x-0 top-0 font-news text-[clamp(2rem,6vw,3.8rem)] font-medium leading-tight text-nap-ivory drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
+            {TEXT.b}
+          </p>
+          <p className="b-textC absolute inset-x-0 top-0 mx-auto max-w-2xl font-news text-[clamp(1.6rem,4.4vw,2.8rem)] font-medium leading-tight text-nap-ink">
+            {TEXT.c}
+          </p>
         </div>
       </div>
     </section>

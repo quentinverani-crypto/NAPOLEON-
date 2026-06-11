@@ -232,3 +232,18 @@
 @media (prefers-reduced-motion: reduce) {
   .nap-sweep::after { display: none; }
 }
+
+/* Lenis smooth scroll (site vitrine) — styles scopés à .lenis, sans effet sur le 1er site */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
