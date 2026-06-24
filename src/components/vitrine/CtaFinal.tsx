@@ -208,7 +208,7 @@ export function CtaFinal() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="nap-sweep inline-flex w-full items-center justify-center rounded-full border border-nap-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-nap-gold transition-colors hover:bg-nap-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-gold disabled:opacity-60"
+                  className="nap-sweep inline-flex w-full items-center justify-center border border-nap-gold/70 px-7 py-4 font-imperial text-[0.72rem] uppercase tracking-[0.22em] text-nap-gold transition-colors hover:bg-nap-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-gold disabled:opacity-60"
                 >
                   {status === "loading" ? "Envoi…" : "Demander une démo"}
                 </button>

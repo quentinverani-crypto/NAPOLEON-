@@ -143,9 +143,10 @@
    Charte graphique 2026 appliquée à la lettre.
    ========================================================================= */
 @theme inline {
-  /* Typographie vitrine */
-  --font-news: var(--font-newsreader), "Newsreader", Georgia, serif;
-  --font-body: var(--font-manrope), "Manrope", system-ui, sans-serif;
+  /* Typographie vitrine — direction impériale / éditoriale */
+  --font-news: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-spectral), "Spectral", Georgia, serif;
+  --font-imperial: var(--font-cinzel), "Cinzel", Georgia, serif;
 
   /* Palette officielle — aucune autre teinte autorisée */
   --color-nap-blue: #5478a8;            /* Bleu Napoléon — structure, titres */
@@ -162,14 +163,14 @@
   --color-nap-border: #e5e7eb;          /* Border — filets, bordures */
 }
 
-/* Eyebrow / surtitre : Manrope capitales très espacées (façon document officiel) */
+/* Eyebrow / surtitre : capitales romaines Cinzel (façon inscription lapidaire) */
 .nap-eyebrow {
-  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-family: var(--font-cinzel), Georgia, serif;
   text-transform: uppercase;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.22em;
   font-size: 0.72rem;
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 /* Balayage doré 70° au survol des boutons (signature impériale) */

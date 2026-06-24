@@ -34,16 +34,14 @@ export function DemoButton({
   className?: string;
 }) {
   const variants: Record<string, string> = {
-    primary:
-      "bg-nap-deep text-white hover:bg-nap-ink shadow-[0_10px_30px_-12px_rgba(31,58,107,0.6)]",
-    goldline:
-      "border border-nap-gold text-nap-gold hover:bg-nap-gold/10",
+    primary: "bg-nap-ink text-nap-ivory hover:bg-nap-deep",
+    goldline: "border border-nap-gold/70 text-nap-gold hover:bg-nap-gold/10",
   };
   return (
     <a
       href={href}
       className={cn(
-        "nap-sweep inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
+        "nap-sweep inline-flex items-center justify-center gap-2 px-9 py-4 font-imperial text-[0.72rem] uppercase tracking-[0.22em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-gold focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
         variants[variant],
         className,
       )}

@@ -1,6 +1,5 @@
 import { Eyebrow, DemoButton } from "./ui";
 import { Reveal } from "./Reveal";
-import { GoldWave } from "./GoldWave";
 
 export function Hero() {
   return (
@@ -53,17 +52,11 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/* Onde vocale dorée, fine et lente, en bas du hero (rappel du préambule) */}
+      {/* Filet d'or horizontal, fin et discret, en bas du hero */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center"
+        className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-px w-[min(80vw,640px)] nap-hairline-gold"
         aria-hidden
-      >
-        <GoldWave
-          className="h-14 w-[min(90vw,720px)]"
-          strokeWidth={1.2}
-          opacity={0.5}
-        />
-      </div>
+      />
     </section>
   );
 }

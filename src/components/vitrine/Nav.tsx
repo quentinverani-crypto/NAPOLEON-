@@ -74,7 +74,7 @@ export function Nav({ show }: { show: boolean }) {
             <div className="flex items-center gap-2">
               <a
                 href="#demo"
-                className="nap-sweep hidden rounded-full bg-nap-deep px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-nap-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-deep focus-visible:ring-offset-2 sm:inline-flex"
+                className="nap-sweep hidden bg-nap-ink px-6 py-3 font-imperial text-[0.66rem] uppercase tracking-[0.2em] text-nap-ivory transition-colors hover:bg-nap-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nap-gold focus-visible:ring-offset-2 sm:inline-flex"
               >
                 Demander une démo
               </a>
@@ -131,7 +131,7 @@ export function Nav({ show }: { show: boolean }) {
                     <a
                       href="#demo"
                       onClick={() => setOpen(false)}
-                      className="block rounded-full bg-nap-deep px-5 py-3 text-center text-sm font-semibold text-white"
+                      className="block bg-nap-ink px-5 py-3.5 text-center font-imperial text-[0.7rem] uppercase tracking-[0.2em] text-nap-ivory"
                     >
                       Demander une démo
                     </a>

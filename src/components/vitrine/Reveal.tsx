@@ -44,23 +44,26 @@ export function Reveal({
       className={cn("relative", className)}
     >
       <motion.div
-        variants={{ hidden: { opacity: 0, y: 26 }, show: { opacity: 1, y: 0 } }}
-        transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+        variants={{
+          hidden: { opacity: 0, y: 42, filter: "blur(6px)" },
+          show: { opacity: 1, y: 0, filter: "blur(0px)" },
+        }}
+        transition={{ duration: 1.05, delay, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}
       </motion.div>
       {blade && (
         <motion.span
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 -inset-x-4 z-10"
+          className="pointer-events-none absolute inset-y-0 -inset-x-6 z-10"
           variants={{
-            hidden: { opacity: 0, x: "-30%" },
-            show: { opacity: [0, 0.9, 0], x: ["-30%", "120%"] },
+            hidden: { opacity: 0, x: "-28%" },
+            show: { opacity: [0, 0.7, 0], x: ["-28%", "118%"] },
           }}
-          transition={{ duration: 0.85, delay: delay + 0.05, ease: "easeOut" }}
+          transition={{ duration: 1.15, delay: delay + 0.1, ease: "easeInOut" }}
           style={{
             background:
-              "linear-gradient(105deg, transparent 43%, rgba(223,182,112,0.55) 50%, transparent 57%)",
+              "linear-gradient(105deg, transparent 45%, rgba(223,182,112,0.45) 50%, transparent 55%)",
           }}
         />
       )}

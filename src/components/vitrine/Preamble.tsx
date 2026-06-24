@@ -1,18 +1,19 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
-import { GoldWave } from "./GoldWave";
 
 const SESSION_KEY = "nap_vitrine_preamble";
 const WORD = "NAPOLEON Médical";
 
 /**
- * Préambule « Le Fil d'or » — timeline GSAP (≤ 5 s, skippable, une fois par
- * session). Une ligne d'or s'étire, vibre comme une onde vocale, se fige en
- * lame diagonale 70° qui ouvre l'écran sur l'ivoire, d'où surgit le wordmark.
- * Tout input saute à l'état final. Reduced-motion : fondu simple.
+ * Préambule « Le Geste impérial » — timeline GSAP (≤ 5,5 s, skippable, une fois
+ * par session). Sur Bleu Nuit, une lame d'or trace la diagonale 70° et tranche
+ * l'écran ; les deux pans s'écartent lentement sur l'ivoire, d'où s'élève
+ * l'emblème, puis le wordmark gravé. Tout input saute à l'état final.
+ * Reduced-motion : fondu simple.
  */
 export function Preamble({ onDone }: { onDone: () => void }) {
   const scope = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ export function Preamble({ onDone }: { onDone: () => void }) {
     if (scope.current) {
       gsap.to(scope.current, {
         autoAlpha: 0,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out",
         onComplete: onDone,
       });
@@ -60,7 +61,7 @@ export function Preamble({ onDone }: { onDone: () => void }) {
       if (reduce) {
         gsap.to(scope.current, {
           autoAlpha: 0,
-          delay: 0.5,
+          delay: 0.6,
           duration: 0.4,
           onComplete: onDone,
         });
@@ -71,12 +72,9 @@ export function Preamble({ onDone }: { onDone: () => void }) {
       const blade = q(".pa-blade")[0] as unknown as SVGLineElement | undefined;
       const len = blade ? blade.getTotalLength() : 0;
 
-      gsap.set(q(".pa-wave, .pa-baseline"), { autoAlpha: 0 });
-      gsap.set(q(".pa-word .pa-char"), {
-        autoAlpha: 0,
-        yPercent: 60,
-        filter: "blur(4px)",
-      });
+      gsap.set(q(".pa-baseline"), { autoAlpha: 0 });
+      gsap.set(q(".pa-emblem"), { autoAlpha: 0, scale: 0.82, yPercent: 6 });
+      gsap.set(q(".pa-word .pa-char"), { autoAlpha: 0, yPercent: 80 });
       if (blade)
         gsap.set(blade, {
           strokeDasharray: len,
@@ -84,52 +82,53 @@ export function Preamble({ onDone }: { onDone: () => void }) {
           autoAlpha: 0,
         });
 
-      const tl = gsap.timeline({ onComplete: finish });
+      const tl = gsap.timeline({
+        onComplete: finish,
+        defaults: { ease: "power3.inOut" },
+      });
       tlRef.current = tl;
 
-      tl.fromTo(
-        q(".pa-line"),
-        { width: 0, autoAlpha: 0 },
-        { width: "40vw", autoAlpha: 1, duration: 0.5, ease: "power2.out" },
-        0,
-      )
-        .to(q(".pa-line"), { autoAlpha: 0, duration: 0.3 }, 0.6)
-        .to(q(".pa-wave"), { autoAlpha: 1, duration: 0.4 }, 0.6)
-        .to(q(".pa-wave"), { autoAlpha: 0, duration: 0.4 }, 2.0);
-
+      // La lame d'or trace la diagonale impériale 70°.
       if (blade) {
-        tl.set(blade, { autoAlpha: 1 }, 2.0).to(
+        tl.set(blade, { autoAlpha: 1 }, 0.3).to(
           blade,
-          { strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut" },
-          2.0,
+          { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" },
+          0.3,
         );
       }
 
+      // Les pans s'écartent lentement, révélant l'ivoire.
       tl.to(
         q(".pa-panel-left"),
-        { xPercent: -58, yPercent: -18, duration: 0.9, ease: "power4.inOut" },
-        2.7,
+        { xPercent: -60, yPercent: -20, duration: 1.3, ease: "power4.inOut" },
+        1.7,
       )
         .to(
           q(".pa-panel-right"),
-          { xPercent: 58, yPercent: 18, duration: 0.9, ease: "power4.inOut" },
-          2.7,
+          { xPercent: 60, yPercent: 20, duration: 1.3, ease: "power4.inOut" },
+          1.7,
         )
-        .to(q(".pa-blade"), { autoAlpha: 0, duration: 0.4 }, 2.9)
+        .to(q(".pa-blade"), { autoAlpha: 0, duration: 0.5 }, 1.9)
+        // L'emblème s'élève sur l'ivoire.
+        .to(
+          q(".pa-emblem"),
+          { autoAlpha: 1, scale: 1, yPercent: 0, duration: 1.1, ease: "power3.out" },
+          2.5,
+        )
+        // Le wordmark se grave.
         .to(
           q(".pa-word .pa-char"),
           {
             autoAlpha: 1,
             yPercent: 0,
-            filter: "blur(0px)",
-            stagger: 0.03,
-            duration: 0.4,
-            ease: "power2.out",
+            stagger: 0.035,
+            duration: 0.55,
+            ease: "power3.out",
           },
-          3.4,
+          3.3,
         )
-        .to(q(".pa-baseline"), { autoAlpha: 1, duration: 0.4 }, 4.1)
-        .to({}, { duration: 0.4 });
+        .to(q(".pa-baseline"), { autoAlpha: 1, duration: 0.5 }, 4.2)
+        .to({}, { duration: 0.5 });
     },
     { scope, dependencies: [] },
   );
@@ -166,17 +165,6 @@ export function Preamble({ onDone }: { onDone: () => void }) {
         style={{ clipPath: "polygon(62% 0, 100% 0, 100% 100%, 38% 100%)" }}
       />
 
-      {/* Fil / onde dorée centrés */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div
-          className="pa-line h-px nap-hairline-gold"
-          style={{ filter: "drop-shadow(0 0 6px rgba(223,182,112,0.5))" }}
-        />
-        <div className="pa-wave absolute w-[44vw] max-w-[560px]">
-          <GoldWave className="h-16 w-full" strokeWidth={1.6} />
-        </div>
-      </div>
-
       {/* La lame diagonale 70° */}
       <svg
         className="absolute inset-0 h-full w-full"
@@ -191,21 +179,30 @@ export function Preamble({ onDone }: { onDone: () => void }) {
           x2="38"
           y2="100"
           stroke="#DFB670"
-          strokeWidth="0.25"
+          strokeWidth="0.18"
           vectorEffect="non-scaling-stroke"
-          style={{ filter: "drop-shadow(0 0 5px rgba(223,182,112,0.7))" }}
         />
       </svg>
 
-      {/* Wordmark révélé sur l'ivoire */}
+      {/* Emblème + wordmark gravé sur l'ivoire */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        <div className="pa-emblem">
+          <Image
+            src="/vitrine/embleme-or-sur-bleu.png"
+            alt="Emblème NAPOLEON Médical"
+            width={184}
+            height={184}
+            priority
+            className="h-auto w-[clamp(96px,12vw,168px)]"
+          />
+        </div>
         <div
           aria-label={WORD}
-          className="pa-word font-news text-nap-ink text-[clamp(2.2rem,7vw,4.5rem)] font-medium leading-none"
+          className="pa-word mt-8 font-news text-nap-ink text-[clamp(2.2rem,7vw,4.5rem)] font-medium leading-none tracking-tight"
         >
           {WORD.split("").map((ch, i) => (
             <span key={i} aria-hidden className="pa-char inline-block">
-              {ch === " " ? " " : ch}
+              {ch === " " ? " " : ch}
             </span>
           ))}
         </div>
