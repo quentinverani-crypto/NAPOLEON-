@@ -2,6 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Design system NAPOLEON Médical (charte 2026). Espace de noms `nm-`,
+   strictement additif : ne redéfinit aucun jeton `nap-*` ni `napoleon-*`. */
+@import "../design-system/tokens.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

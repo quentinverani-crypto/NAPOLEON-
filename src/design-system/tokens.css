@@ -1,0 +1,266 @@
+/* =========================================================================
+   NAPOLEON MÉDICAL — DESIGN SYSTEM 2026
+   Couche de jetons (design tokens).
+
+   Espace de noms `nm-`. Strictement ADDITIF : ce fichier ne redéfinit
+   aucun jeton existant. Les palettes `nap-*` (site /vitrine) et
+   `napoleon-*` (site racine /) restent intactes.
+
+   Source : Charte graphique NAPOLEON Médical, Volume I, édition 2026.
+   · § 11 Palette de couleurs (codes officiels HEX/RGB/CMJN)
+   · § 08 Variantes couleur
+   · § 12/13 Typographie
+   Écart assumé : la charte propose Newsreader + Manrope ; la marque a
+   arbitré Georgia (titres) + Open Sans (contenus). Voir README.md.
+   ========================================================================= */
+
+@theme inline {
+  /* ---------------------------------------------------------------------
+     TYPOGRAPHIE
+     Georgia porte le nom et les grandes écritures ; Open Sans porte tout
+     le contenu. Gelasio est le substitut libre aux métriques identiques à
+     Georgia : il assure un rendu stable sur Android et Linux, où Georgia
+     est absente, sans aucun décalage de mise en page.
+     --------------------------------------------------------------------- */
+  --font-display: Georgia, var(--font-gelasio), "Gelasio", "Times New Roman", serif;
+  --font-text: var(--font-open-sans), "Open Sans", -apple-system, "Segoe UI",
+    system-ui, sans-serif;
+
+  /* ---------------------------------------------------------------------
+     ÉCHELLE TYPOGRAPHIQUE
+     Les quatre tailles d'affichage sont fluides : elles se règlent seules
+     entre mobile et grand écran, sans point de rupture.
+     --------------------------------------------------------------------- */
+  --text-display-xl: clamp(2.75rem, 1.35rem + 5.6vw, 5.5rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.022em;
+
+  --text-display-lg: clamp(2.25rem, 1.35rem + 3.6vw, 4rem);
+  --text-display-lg--line-height: 1.06;
+  --text-display-lg--letter-spacing: -0.018em;
+
+  --text-display-md: clamp(1.875rem, 1.35rem + 2.1vw, 3rem);
+  --text-display-md--line-height: 1.12;
+  --text-display-md--letter-spacing: -0.014em;
+
+  --text-display-sm: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --text-display-sm--line-height: 1.18;
+  --text-display-sm--letter-spacing: -0.01em;
+
+  --text-title-lg: 1.75rem;
+  --text-title-lg--line-height: 1.26;
+  --text-title-lg--letter-spacing: -0.008em;
+
+  --text-title-md: 1.375rem;
+  --text-title-md--line-height: 1.32;
+  --text-title-md--letter-spacing: -0.005em;
+
+  --text-title-sm: 1.125rem;
+  --text-title-sm--line-height: 1.4;
+  --text-title-sm--letter-spacing: 0em;
+
+  --text-lead: 1.1875rem;
+  --text-lead--line-height: 1.62;
+
+  --text-body-lg: 1.0625rem;
+  --text-body-lg--line-height: 1.68;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-body-sm: 0.9375rem;
+  --text-body-sm--line-height: 1.6;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+
+  /* Surtitre — capitales très espacées, façon document officiel. */
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.26em;
+  --text-eyebrow--font-weight: 600;
+
+  /* ---------------------------------------------------------------------
+     PALETTE OFFICIELLE — charte § 11.
+     Aucune teinte hors de cette liste n'est autorisée en aplat de marque.
+     --------------------------------------------------------------------- */
+  --color-nm-blue: #5478a8; /* Bleu Napoléon — structure, titres */
+  --color-nm-blue-light: #7fa0c6; /* Bleu clair — § 08, décoratif */
+  --color-nm-ink: #1a2540; /* Bleu Nuit — autorité, encre */
+  --color-nm-deep: #1f3a6b; /* Bleu Profond — CTA forts */
+  --color-nm-gold: #dfb670; /* Doré Médical — accent prestige */
+  --color-nm-terracotta: #d77962; /* Terracotta — accent éditorial */
+  --color-nm-terracotta-deep: #b85a45; /* Terracotta Deep — emphase */
+  --color-nm-paper: #ffffff; /* Paper — cartes, modales */
+  --color-nm-canvas: #fafbfc; /* Canvas — fond général */
+  --color-nm-ivory: #f3f1ec; /* Ivoire — fond chaud, respirations */
+  --color-nm-ink-soft: #4a5670; /* Ink Soft — texte courant */
+  --color-nm-muted: #9aa0ab; /* Muted — texte secondaire */
+  --color-nm-border: #e5e7eb; /* Border — filets */
+  --color-nm-black: #151616; /* Noir — § 08 */
+
+  /* ---------------------------------------------------------------------
+     EXTENSIONS
+     Absentes de la charte, nécessaires à un produit logiciel. Chacune est
+     dérivée de la palette officielle et vérifiée en contraste WCAG AA sur
+     Paper (#FFFFFF) et sur Ivoire (#F3F1EC).
+     --------------------------------------------------------------------- */
+  --color-nm-ink-deep: #101832; /* fonds sombres profonds — 17,5:1 */
+  --color-nm-gold-ink: #7e5f26; /* l'or en TEXTE sur fond clair — 5,9:1 */
+  --color-nm-blue-ink: #3f5f8c; /* le bleu en TEXTE courant — 6,5:1 */
+  --color-nm-muted-strong: #6b7688; /* texte secondaire lisible — 4,6:1 */
+  --color-nm-border-strong: #cfd5de; /* filets appuyés, séparateurs */
+
+  /* États. Le rouge pur est proscrit : la charte tient la chaleur par le
+     terracotta, qui sert donc aussi d'alerte. */
+  --color-nm-success: #3f7a64; /* 5,0:1 */
+  --color-nm-warning: #8f6520; /* 5,2:1 */
+  --color-nm-danger: #b85a45; /* = Terracotta Deep, 4,6:1 */
+  --color-nm-info: #1f3a6b; /* = Bleu Profond, 11,2:1 */
+
+  /* ---------------------------------------------------------------------
+     RAYONS
+     L'emblème est un cercle et ses piliers sont des stades : le système
+     assume des arrondis généreux. Préfixés pour ne pas heurter les
+     `--radius-*` déjà définis par shadcn dans globals.css.
+     --------------------------------------------------------------------- */
+  --radius-nm-xs: 0.25rem;
+  --radius-nm-sm: 0.375rem;
+  --radius-nm-md: 0.625rem;
+  --radius-nm-lg: 0.875rem;
+  --radius-nm-xl: 1.25rem;
+  --radius-nm-2xl: 1.75rem;
+  --radius-nm-pill: 9999px;
+
+  /* ---------------------------------------------------------------------
+     ÉLÉVATION
+     Ombres teintées à l'encre, jamais au noir pur : une ombre grise sur
+     une palette bleue « salit » la surface.
+     Rappel charte § 10 : aucune ombre ne s'applique JAMAIS au logotype.
+     --------------------------------------------------------------------- */
+  --shadow-nm-1: 0 1px 2px rgba(26, 37, 64, 0.06);
+  --shadow-nm-2: 0 4px 12px -2px rgba(26, 37, 64, 0.08);
+  --shadow-nm-3: 0 12px 32px -8px rgba(26, 37, 64, 0.12);
+  --shadow-nm-4: 0 24px 60px -16px rgba(26, 37, 64, 0.18);
+  --shadow-nm-gold: 0 8px 28px -10px rgba(223, 182, 112, 0.55);
+
+  /* ---------------------------------------------------------------------
+     RYTHME VERTICAL
+     --------------------------------------------------------------------- */
+  --spacing-gutter: 1.5rem;
+  --spacing-section: 5rem;
+  --spacing-section-lg: 7.5rem;
+
+  /* ---------------------------------------------------------------------
+     MOUVEMENT
+     Ton mesuré, donc mouvement mesuré : rien ne rebondit, rien ne dépasse.
+     --------------------------------------------------------------------- */
+  --ease-nm-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-nm-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-nm-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* =========================================================================
+   PRIMITIVES
+   Quelques classes que les seules utilitaires ne peuvent pas exprimer.
+   ========================================================================= */
+
+/* Surtitre officiel. Toujours en Open Sans, jamais en Georgia : les
+   capitales très espacées d'un serif deviennent illisibles. */
+.nm-eyebrow {
+  font-family: var(--font-text);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: var(--text-eyebrow--font-weight);
+  text-transform: uppercase;
+}
+
+/* Zone de protection du logotype — charte § 10 : un espace libre égal à
+   ½ × le diamètre du cercle tout autour. À poser sur le conteneur du
+   logotype pour matérialiser la réserve pendant l'intégration. */
+.nm-logo-clearspace {
+  padding: calc(var(--nm-emblem-size, 40px) * 0.5);
+}
+
+/* Chiffres tabulaires — obligatoire partout où des nombres s'alignent
+   (tableaux, statistiques, posologies, horodatages). */
+.nm-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* L'angle de marque : 66,16°, celui de la diagonale de l'emblème.
+   Un seul filet par écran — charte § 13 « Or rare ». */
+.nm-rule-imperial {
+  position: absolute;
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--color-nm-gold) 60%, transparent),
+    transparent
+  );
+  transform: rotate(23.84deg);
+  transform-origin: center;
+}
+
+/* Filet or horizontal, statique. */
+.nm-hairline-gold {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-nm-gold) 70%, transparent),
+    transparent
+  );
+}
+
+/* Balayage doré à 66° au survol — signature impériale, réservée aux CTA
+   primaires. Désactivé si l'utilisateur a demandé moins d'animation. */
+.nm-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.nm-sweep::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    108deg,
+    transparent 38%,
+    rgba(223, 182, 112, 0.5) 50%,
+    transparent 62%
+  );
+  transform: translateX(-130%) skewX(-18deg);
+  transition: transform 0.55s var(--ease-nm-standard);
+}
+.nm-sweep:hover::after,
+.nm-sweep:focus-visible::after {
+  transform: translateX(130%) skewX(-18deg);
+}
+.nm-sweep > * {
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nm-sweep::after {
+    display: none;
+  }
+}
+
+/* Anneau de focus unique à tout le système. Le focus se voit toujours :
+   une interface médicale se pilote au clavier. */
+.nm-focus-ring {
+  outline: none;
+}
+.nm-focus-ring:focus-visible {
+  outline: 2px solid var(--color-nm-deep);
+  outline-offset: 2px;
+  border-radius: inherit;
+}

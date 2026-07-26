@@ -1,0 +1,185 @@
+# NAPOLEON Médical — Design System 2026
+
+La charte graphique (Volume I) fixe l'identité. Ce dossier fixe **l'interface** :
+les jetons, le logotype vectoriel, la typographie et les composants.
+
+**Référence vivante :** [`/design-system`](../app/design-system/page.tsx) — tout ce
+qui suit y est rendu, mesuré et vérifiable dans un navigateur.
+
+---
+
+## La règle qui décide de tout
+
+> **Georgia** porte le nom et les grandes écritures.
+> **Open Sans** porte les contenus.
+
+« Grande écriture » ne veut pas dire « texte important » : un chiffre-clé de
+48 px est en Georgia, un avertissement critique de 15 px est en Open Sans.
+C'est la **taille** qui tranche, jamais le poids éditorial.
+
+Georgia est absente d'Android et de la plupart des Linux. **Gelasio** — substitut
+libre aux métriques identiques — prend le relais sans le moindre décalage de
+mise en page. L'ordre de la pile est, et doit rester :
+
+```
+Georgia → Gelasio → Times New Roman → serif
+```
+
+Il est défini une seule fois, dans `tokens.css` (`--font-display`).
+
+---
+
+## Mise en service
+
+Déjà faite. Pour mémoire, elle tient en deux points :
+
+1. `src/app/globals.css` importe `../design-system/tokens.css`
+2. `src/app/layout.tsx` pose `designSystemFontVariables` sur `<html>`
+
+Ensuite, tout s'importe depuis le point d'entrée unique :
+
+```tsx
+import { Button, Display, Emblem, Logotype } from "@/design-system";
+```
+
+Ne jamais importer un fichier interne (`@/design-system/components/Button`) :
+le barrel est le contrat, le reste est réarrangeable.
+
+---
+
+## Additif par construction
+
+Ce système **ne touche à rien** de ce qui existe :
+
+| Espace de noms | Portée | État |
+|---|---|---|
+| `nm-*`, `font-display`, `font-text` | design system | ce dossier |
+| `nap-*`, `font-news`, `font-body` | site `/vitrine` | inchangé |
+| `napoleon-*`, `font-sans`, `font-serif` | site racine `/` | inchangé |
+
+Un seul fichier partagé a été modifié : `src/lib/utils.ts`.
+
+`tailwind-merge` ne connaît que l'échelle typographique par défaut de Tailwind.
+Sans déclaration explicite, il prend `text-display-lg` pour une **couleur** et la
+supprime dès qu'un `text-<couleur>` la suit — le texte retombe à 16 px, sans
+erreur, sans avertissement. `cn()` déclare donc les nouveaux groupes. L'ajout
+est strictement additif : les groupes par défaut sont conservés.
+
+---
+
+## Jetons
+
+`tokens.css` est la **source de vérité** — c'est lui que consomme Tailwind.
+`tokens.ts` en est le miroir TypeScript : il sert à documenter et à alimenter la
+page `/design-system`. **Toute modification doit être portée dans les deux.**
+
+### Couleurs
+
+Quatorze teintes officielles (charte § 11 et § 08) et neuf extensions. Chaque
+valeur porte son contraste WCAG mesuré, et c'est le contraste qui décide de
+l'usage :
+
+- **Doré Médical `#DFB670` plafonne à 1,9:1 sur blanc.** Il ne s'écrit pas sur
+  fond clair. Pour l'or en texte : `nm-gold-ink` (5,9:1). Le doré du logotype
+  fait exception — les logotypes sont exemptés du critère WCAG 1.4.3.
+- **Terracotta `#D77962` plafonne à 3,09:1.** Convient aux grands corps, pas aux
+  surtitres de 12 px. Pour un surtitre coloré : `nm-terracotta-deep` (4,58:1).
+- **Muted `#9AA0AB` plafonne à 2,63:1.** Décoratif uniquement. Pour du texte
+  secondaire réellement lisible : `nm-muted-strong` (4,59:1).
+
+Les états (`success`, `warning`, `danger`, `info`) sont des **extensions** : la
+charte n'en prévoit pas. Ils sont dérivés dans sa température — pas de rouge
+pur, le terracotta porte l'alerte.
+
+### Typographie, rayons, élévation, mouvement
+
+Voir `/design-system` § 3 et § 5. Deux points valent d'être retenus :
+
+- Les quatre tailles d'affichage sont **fluides** (`clamp`) : elles se règlent
+  seules entre mobile et grand écran, sans point de rupture.
+- Les ombres sont teintées à l'encre, jamais au noir — une ombre grise salit une
+  palette bleue. Et **aucune ombre ne s'applique jamais au logotype** (§ 10).
+
+---
+
+## Le logotype
+
+`<Emblem />` dessine l'emblème seul, `<Logotype />` les verrouillages complets.
+
+L'emblème est **vectoriel** : reconstruit sur la grille de tracé de la charte
+§ 09, il est net du favicon 16 px à la signalétique. Sa géométrie est nommée et
+commentée dans `brand/emblem-geometry.ts`.
+
+### Le liseré de réserve
+
+La pièce la plus fragile du dessin. C'est la réserve blanche qui détache la tête
+et la diagonale de tout ce qu'elles recouvrent — sans elle, l'emblème se referme
+en une tache.
+
+Elle vaut donc **toujours la couleur exacte du support**. Sur blanc et sur encre
+c'est automatique. Partout ailleurs :
+
+```tsx
+<Emblem variant="negative" field="#5478A8" />      // par prop
+<div style={{ "--nm-field": "#5478A8" }}>…</div>   // ou par variable CSS
+```
+
+### Seuil de lisibilité
+
+Sous **24 px**, le liseré devient sous-pixellique. Utiliser `variant="mono"`.
+
+### Interdits — charte § 10
+
+Ne jamais recolorer hors charte, rogner, déformer, pivoter, ni ajouter d'ombre,
+de relief ou de contour. Zone de protection : ½ × le diamètre du cercle tout
+autour, qu'aucun élément ne pénètre.
+
+---
+
+## Écarts entre la charte et le tracé
+
+Trois points où le document écrit et la marque réelle ne disent pas la même
+chose. **Le système suit le tracé** ; c'est à la marque de trancher si elle veut
+l'inverse.
+
+| Point | La charte dit | Le tracé mesure | Retenu |
+|---|---|---|---|
+| Diagonale | 70° (§ 09) | 66,16° | le tracé |
+| Piliers | rayon = ⅛ Ø (§ 09) | largeur = 0,111 × Ø | le tracé |
+| Typographie | Newsreader + Manrope (§ 12-13) | — | Georgia + Open Sans |
+
+**Un quatrième point, non documenté.** La diagonale n'est pas un trait unique :
+ce sont **deux traits parallèles décalés**, interrompus par la tête, de sorte
+que le regard lit un seul geste que le volume de l'emblème déplace. Le décalage
+est reproduit tel quel, mais rien dans la charte ne le mentionne. À inscrire au
+§ 09 s'il est intentionnel.
+
+---
+
+## Reconstruction de l'emblème
+
+Les tracés de `emblem-geometry.ts` proviennent d'une vectorisation de
+`public/logos/napoleon-emblem-v2-navy.png` :
+
+1. cercle ajusté par moindres carrés sur le bord extérieur du filet ;
+2. piliers, diagonales et yeux mesurés par composantes connexes ;
+3. contour de la tête isolé, squelettisé (Zhang-Suen), élagué, puis lissé en
+   courbes de Bézier ;
+4. tout ramené dans un repère de 1000 unités, le bord extérieur du filet
+   affleurant exactement le `viewBox`.
+
+Recouvrement vérifié avec l'original : **IoU 0,80** — élevé pour une marque
+filaire, où la mesure est très sensible au sous-pixel.
+
+Les écarts d'asymétrie du tracé d'origine (< 1 %) ont été symétrisés
+horizontalement ; les positions verticales suivent la mesure.
+
+---
+
+## Ce qui manque encore
+
+- Aucun **thème sombre** : la palette a de quoi le porter (`nm-ink`,
+  `nm-ink-deep`, `nm-ivory`) mais aucun jeu de jetons inversé n'est défini.
+- **Navigation, onglets, modales, menus, info-bulles** ne sont pas couverts.
+- Les sites `/` et `/vitrine` n'ont pas été migrés — c'est un chantier distinct,
+  volontairement hors périmètre.
