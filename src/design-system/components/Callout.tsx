@@ -17,33 +17,33 @@ type CalloutTone = "neutral" | "info" | "gold" | "success" | "warning" | "danger
 const TONES: Record<CalloutTone, { box: string; rule: string; title: string }> = {
   neutral: {
     box: "bg-nm-ivory text-nm-ink-soft",
-    rule: "bg-nm-border-strong",
+    rule: "bg-nm-ink-soft/45",
     title: "text-nm-ink",
   },
   info: {
     box: "bg-nm-blue/8 text-nm-ink-soft",
     rule: "bg-nm-blue",
-    title: "text-nm-blue-ink",
+    title: "text-nm-blue",
   },
   gold: {
     box: "bg-nm-gold/12 text-nm-ink-soft",
     rule: "bg-nm-gold",
-    title: "text-nm-gold-ink",
+    title: "text-nm-ink",
   },
   success: {
-    box: "bg-nm-success/8 text-nm-ink-soft",
-    rule: "bg-nm-success",
-    title: "text-nm-success",
+    box: "bg-nm-deep/6 text-nm-ink-soft",
+    rule: "bg-nm-deep",
+    title: "text-nm-deep",
   },
   warning: {
-    box: "bg-nm-warning/8 text-nm-ink-soft",
-    rule: "bg-nm-warning",
-    title: "text-nm-warning",
+    box: "bg-nm-gold/14 text-nm-ink-soft",
+    rule: "bg-nm-gold",
+    title: "text-nm-ink",
   },
   danger: {
-    box: "bg-nm-danger/8 text-nm-ink-soft",
-    rule: "bg-nm-danger",
-    title: "text-nm-danger",
+    box: "bg-nm-terracotta-deep/8 text-nm-ink-soft",
+    rule: "bg-nm-terracotta-deep",
+    title: "text-nm-terracotta-deep",
   },
 };
 

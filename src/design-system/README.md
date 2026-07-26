@@ -75,21 +75,39 @@ page `/design-system`. **Toute modification doit être portée dans les deux.**
 
 ### Couleurs
 
-Quatorze teintes officielles (charte § 11 et § 08) et neuf extensions. Chaque
-valeur porte son contraste WCAG mesuré, et c'est le contraste qui décide de
-l'usage :
+**Quinze valeurs, pas une de plus.** Quatorze viennent de la charte (§ 11 et
+§ 08) ; la quinzième est le Bleu Ardoise `#253846` du logotype.
 
-- **Doré Médical `#DFB670` plafonne à 1,9:1 sur blanc.** Il ne s'écrit pas sur
-  fond clair. Pour l'or en texte : `nm-gold-ink` (5,9:1). Le doré du logotype
-  fait exception — les logotypes sont exemptés du critère WCAG 1.4.3.
-- **Terracotta `#D77962` plafonne à 3,09:1.** Convient aux grands corps, pas aux
-  surtitres de 12 px. Pour un surtitre coloré : `nm-terracotta-deep` (4,58:1).
-- **Muted `#9AA0AB` plafonne à 2,63:1.** Décoratif uniquement. Pour du texte
-  secondaire réellement lisible : `nm-muted-strong` (4,59:1).
+Une interface a besoin de nuances que ces quinze valeurs ne couvrent pas —
+filets, survols, fonds d'encarts. Elles s'obtiennent **exclusivement par
+opacité** sur une couleur de la palette : `border-nm-ink-soft/45`,
+`bg-nm-gold/12`. Une opacité n'introduit aucune teinte nouvelle ; un nouveau
+code hexadécimal, si. **Ne jamais en ajouter un.**
 
-Les états (`success`, `warning`, `danger`, `info`) sont des **extensions** : la
-charte n'en prévoit pas. Ils sont dérivés dans sa température — pas de rouge
-pur, le terracotta porte l'alerte.
+Le contraste mesuré décide de l'usage, et il écarte trois couleurs du texte :
+
+| Couleur | Sur blanc | Ce qu'elle peut faire |
+|---|---|---|
+| Doré Médical `#DFB670` | 1,90:1 | filets, aplats, jamais du texte |
+| Terracotta `#D77962` | 3,09:1 | grands corps uniquement |
+| Muted `#9AA0AB` | 2,63:1 | décoratif uniquement |
+
+Ce n'est pas une contrainte importée : la charte dit déjà du doré qu'il ne
+s'emploie « qu'en touche ». Le seul texte doré autorisé est « Médical » dans le
+logotype — les logotypes sont exemptés du critère WCAG 1.4.3.
+
+**Les états** n'existent pas dans la charte. Ils sont donc composés avec elle,
+sans y ajouter :
+
+| État | Couleur | Note |
+|---|---|---|
+| Information | `nm-blue` | 4,54:1 |
+| Validation | `nm-deep` | 11,20:1 — bleu et non vert, il n'y a pas de vert dans la charte |
+| Vigilance | `nm-gold` | en filet et en fond ; le texte reste en Bleu Nuit |
+| Alerte | `nm-terracotta-deep` | 4,58:1 — pas de rouge, la charte tient la chaleur par le terracotta |
+
+Aucun état ne repose sur la seule couleur : le libellé porte toujours
+l'information.
 
 ### Typographie, rayons, élévation, mouvement
 
@@ -104,7 +122,18 @@ Voir `/design-system` § 3 et § 5. Deux points valent d'être retenus :
 
 ## Le logotype
 
-`<Emblem />` dessine l'emblème seul, `<Logotype />` les verrouillages complets.
+`<Emblem />` dessine l'emblème seul, `<Logotype />` les verrouillages.
+
+**Deux verrouillages, et deux seulement :**
+
+| Variante | Composition | Usage |
+|---|---|---|
+| `primary` | emblème + nom, à l'horizontale | la signature de référence |
+| `secondary` | emblème au-dessus du nom | formats étroits, carrés |
+
+**La signature « La voix médicale souveraine » ne fait pas partie du
+logotype.** Elle se compose dans la page, à distance du verrouillage. La
+constante `BASELINE` l'exporte pour éviter les variantes de saisie.
 
 L'emblème est **vectoriel** : reconstruit sur la grille de tracé de la charte
 § 09, il est net du favicon 16 px à la signalétique. Sa géométrie est nommée et
@@ -168,7 +197,14 @@ Les tracés de `emblem-geometry.ts` proviennent d'une vectorisation de
 4. tout ramené dans un repère de 1000 unités, le bord extérieur du filet
    affleurant exactement le `viewBox`.
 
-Recouvrement vérifié avec l'original : **IoU 0,80** — élevé pour une marque
+Les GRAISSES (filet du cercle 38, contour de tête 18, liseré 60) ont ensuite
+été relevées à l'œil, d'après la version modifiée du logotype fournie par la
+marque. **Elles sont approximatives** : l'image n'était disponible que collée
+en conversation, jamais en fichier, donc impossible à mesurer. Elles sont
+regroupées en tête de `emblem-geometry.ts` pour être réglées d'une ligne dès
+que le fichier source est déposé dans le dépôt.
+
+Recouvrement vérifié avec la version antérieure : **IoU 0,80** — élevé pour une marque
 filaire, où la mesure est très sensible au sous-pixel.
 
 Les écarts d'asymétrie du tracé d'origine (< 1 %) ont été symétrisés
@@ -179,7 +215,7 @@ horizontalement ; les positions verticales suivent la mesure.
 ## Ce qui manque encore
 
 - Aucun **thème sombre** : la palette a de quoi le porter (`nm-ink`,
-  `nm-ink-deep`, `nm-ivory`) mais aucun jeu de jetons inversé n'est défini.
+  `nm-slate`, `nm-ivory`) mais aucun jeu de jetons inversé n'est défini.
 - **Navigation, onglets, modales, menus, info-bulles** ne sont pas couverts.
 - Les sites `/` et `/vitrine` n'ont pas été migrés — c'est un chantier distinct,
   volontairement hors périmètre.

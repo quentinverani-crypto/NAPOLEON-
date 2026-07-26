@@ -49,13 +49,13 @@ const controlBase = [
   "placeholder:text-nm-muted",
   "transition-[border-color,box-shadow] duration-200",
   "outline-none focus-visible:border-nm-deep focus-visible:ring-2 focus-visible:ring-nm-deep/25",
-  "disabled:cursor-not-allowed disabled:bg-nm-ivory disabled:text-nm-muted-strong",
+  "disabled:cursor-not-allowed disabled:bg-nm-ivory disabled:text-nm-ink-soft",
 ].join(" ");
 
 const edge = (invalid: boolean) =>
   invalid
-    ? "border-nm-danger focus-visible:border-nm-danger focus-visible:ring-nm-danger/25"
-    : "border-nm-border-strong";
+    ? "border-nm-terracotta-deep focus-visible:border-nm-terracotta-deep focus-visible:ring-nm-terracotta-deep/25"
+    : "border-nm-ink-soft/45";
 
 export type FieldProps = {
   label: ReactNode;
@@ -82,7 +82,7 @@ export function Field({ label, hint, error, required, children, className }: Fie
           {label}
           {required && (
             <>
-              <span className="text-nm-danger ml-1" aria-hidden="true">
+              <span className="text-nm-terracotta-deep ml-1" aria-hidden="true">
                 *
               </span>
               <span className="sr-only"> (obligatoire)</span>
@@ -93,11 +93,11 @@ export function Field({ label, hint, error, required, children, className }: Fie
         {children}
 
         {invalid ? (
-          <p id={errorId} role="alert" className="font-text text-caption text-nm-danger">
+          <p id={errorId} role="alert" className="font-text text-caption text-nm-terracotta-deep">
             {error}
           </p>
         ) : hint ? (
-          <p id={hintId} className="font-text text-caption text-nm-muted-strong">
+          <p id={hintId} className="font-text text-caption text-nm-ink-soft">
             {hint}
           </p>
         ) : null}
@@ -172,7 +172,7 @@ export function Select({ className, children, ...props }: SelectProps) {
       <svg
         viewBox="0 0 20 20"
         aria-hidden="true"
-        className="text-nm-muted-strong pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2"
+        className="text-nm-ink-soft pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2"
       >
         <path
           d="M5 8l5 5 5-5"
@@ -204,7 +204,7 @@ export function Checkbox({
         {...props}
         id={id}
         type="checkbox"
-        className="border-nm-border-strong accent-nm-deep focus-visible:outline-nm-deep mt-0.5 size-4 shrink-0 rounded-nm-xs border outline-none focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="border-nm-ink-soft/45 accent-nm-deep focus-visible:outline-nm-deep mt-0.5 size-4 shrink-0 rounded-nm-xs border outline-none focus-visible:outline-2 focus-visible:outline-offset-2"
       />
       <label htmlFor={id} className="font-text text-body-sm text-nm-ink-soft cursor-pointer">
         {label}

@@ -13,44 +13,51 @@ export type ColorToken = {
   token: string;
   name: string;
   hex: string;
-  /** Rôle assigné par la charte, ou raison d'être de l'extension. */
+  /** Rôle assigné par la charte. */
   usage: string;
   /** Contraste WCAG sur Paper (#FFFFFF). */
   onPaper: number;
-  /** `true` si le jeton figure dans la charte, `false` si c'est une extension. */
-  charter: boolean;
 };
 
-/** Palette officielle — charte 2026 § 11 et § 08. */
+/**
+ * LA palette. Quinze valeurs, pas une de plus.
+ *
+ * Quatorze viennent de la charte 2026 (§ 11 et § 08) ; la quinzième,
+ * Bleu Ardoise #253846, est la couleur du logotype, ajoutée par la marque.
+ *
+ * Les nuances dont une interface a besoin (filets, survols, fonds d'encarts)
+ * s'obtiennent par OPACITÉ sur ces valeurs — `bg-nm-gold/12`,
+ * `border-nm-ink-soft/45`. Jamais par un nouveau code hexadécimal.
+ */
 export const PALETTE: ColorToken[] = [
-  { token: "nm-blue", name: "Bleu Napoléon", hex: "#5478A8", usage: "Structure, titres", onPaper: 4.54, charter: true },
-  { token: "nm-blue-light", name: "Bleu clair", hex: "#7FA0C6", usage: "Décoratif, variantes logo", onPaper: 2.71, charter: true },
-  { token: "nm-ink", name: "Bleu Nuit · Ink", hex: "#1A2540", usage: "Autorité, encre, fonds sombres", onPaper: 15.19, charter: true },
-  { token: "nm-deep", name: "Bleu Profond", hex: "#1F3A6B", usage: "CTA forts & boutons", onPaper: 11.2, charter: true },
-  { token: "nm-gold", name: "Doré Médical", hex: "#DFB670", usage: "Accent prestige — jamais en aplat dominant", onPaper: 1.9, charter: true },
-  { token: "nm-terracotta", name: "Terracotta", hex: "#D77962", usage: "Accent éditorial", onPaper: 3.09, charter: true },
-  { token: "nm-terracotta-deep", name: "Terracotta Deep", hex: "#B85A45", usage: "Emphase italique", onPaper: 4.58, charter: true },
-  { token: "nm-paper", name: "Paper", hex: "#FFFFFF", usage: "Cartes & modales", onPaper: 1, charter: true },
-  { token: "nm-canvas", name: "Canvas", hex: "#FAFBFC", usage: "Fond général de l'application", onPaper: 1.02, charter: true },
-  { token: "nm-ivory", name: "Ivoire", hex: "#F3F1EC", usage: "Fond chaud, respirations", onPaper: 1.13, charter: true },
-  { token: "nm-ink-soft", name: "Ink Soft", hex: "#4A5670", usage: "Texte courant", onPaper: 7.35, charter: true },
-  { token: "nm-muted", name: "Muted", hex: "#9AA0AB", usage: "Texte secondaire — décoratif uniquement", onPaper: 2.63, charter: true },
-  { token: "nm-border", name: "Border", hex: "#E5E7EB", usage: "Filets, bordures", onPaper: 1.24, charter: true },
-  { token: "nm-black", name: "Noir", hex: "#151616", usage: "Monochromie, gravure", onPaper: 18.13, charter: true },
+  { token: "nm-blue", name: "Bleu Napoléon", hex: "#5478A8", usage: "Structure, titres", onPaper: 4.54 },
+  { token: "nm-blue-light", name: "Bleu clair", hex: "#7FA0C6", usage: "Décoratif, variantes logo", onPaper: 2.71 },
+  { token: "nm-ink", name: "Bleu Nuit · Ink", hex: "#1A2540", usage: "Autorité, encre, fonds sombres", onPaper: 15.19 },
+  { token: "nm-slate", name: "Bleu Ardoise", hex: "#253846", usage: "Couleur du logotype", onPaper: 12.12 },
+  { token: "nm-deep", name: "Bleu Profond", hex: "#1F3A6B", usage: "CTA forts & boutons", onPaper: 11.2 },
+  { token: "nm-gold", name: "Doré Médical", hex: "#DFB670", usage: "Accent prestige — jamais en aplat dominant", onPaper: 1.9 },
+  { token: "nm-terracotta", name: "Terracotta", hex: "#D77962", usage: "Accent éditorial", onPaper: 3.09 },
+  { token: "nm-terracotta-deep", name: "Terracotta Deep", hex: "#B85A45", usage: "Emphase italique, alerte", onPaper: 4.58 },
+  { token: "nm-paper", name: "Paper", hex: "#FFFFFF", usage: "Cartes & modales", onPaper: 1 },
+  { token: "nm-canvas", name: "Canvas", hex: "#FAFBFC", usage: "Fond général de l'application", onPaper: 1.02 },
+  { token: "nm-ivory", name: "Ivoire", hex: "#F3F1EC", usage: "Fond chaud, respirations", onPaper: 1.13 },
+  { token: "nm-ink-soft", name: "Ink Soft", hex: "#4A5670", usage: "Texte courant", onPaper: 7.35 },
+  { token: "nm-muted", name: "Muted", hex: "#9AA0AB", usage: "Décoratif — pas de texte", onPaper: 2.63 },
+  { token: "nm-border", name: "Border", hex: "#E5E7EB", usage: "Filets, bordures", onPaper: 1.24 },
+  { token: "nm-black", name: "Noir", hex: "#151616", usage: "Monochromie, gravure", onPaper: 18.13 },
 ];
 
-/** Extensions — absentes de la charte, dérivées et vérifiées en contraste. */
-export const EXTENSIONS: ColorToken[] = [
-  { token: "nm-ink-deep", name: "Ink Deep", hex: "#101832", usage: "Fonds sombres profonds", onPaper: 17.52, charter: false },
-  { token: "nm-gold-ink", name: "Or lisible", hex: "#7E5F26", usage: "L'or EN TEXTE sur fond clair", onPaper: 5.91, charter: false },
-  { token: "nm-blue-ink", name: "Bleu lisible", hex: "#3F5F8C", usage: "Le bleu en texte courant", onPaper: 6.51, charter: false },
-  { token: "nm-muted-strong", name: "Muted Strong", hex: "#6B7688", usage: "Texte secondaire réellement lisible", onPaper: 4.59, charter: false },
-  { token: "nm-border-strong", name: "Border Strong", hex: "#CFD5DE", usage: "Filets appuyés, contours de champs", onPaper: 1.48, charter: false },
-  { token: "nm-success", name: "Succès", hex: "#3F7A64", usage: "Validation, état conforme", onPaper: 5.02, charter: false },
-  { token: "nm-warning", name: "Vigilance", hex: "#8F6520", usage: "Attention requise", onPaper: 5.18, charter: false },
-  { token: "nm-danger", name: "Alerte", hex: "#B85A45", usage: "Erreur, destruction — = Terracotta Deep", onPaper: 4.58, charter: false },
-  { token: "nm-info", name: "Information", hex: "#1F3A6B", usage: "Information neutre — = Bleu Profond", onPaper: 11.2, charter: false },
-];
+/**
+ * Les états. La charte n'en prévoit pas : ils sont COMPOSÉS avec elle, sans
+ * ajouter la moindre teinte. Aucun ne repose sur la seule couleur — le
+ * libellé porte toujours l'information.
+ */
+export const STATES = [
+  { state: "Information", cls: "bg-nm-blue", note: "Bleu Napoléon — 4,54:1" },
+  { state: "Validation", cls: "bg-nm-deep", note: "Bleu Profond — 11,20:1. Bleu et non vert : il n'y a pas de vert dans la charte." },
+  { state: "Vigilance", cls: "bg-nm-gold", note: "Doré Médical en filet et en fond ; le texte reste en Bleu Nuit — l'or ne s'écrit pas." },
+  { state: "Alerte", cls: "bg-nm-terracotta-deep", note: "Terracotta Deep — 4,58:1. Pas de rouge : la charte tient la chaleur par le terracotta." },
+] as const;
 
 export type TypeToken = {
   token: string;

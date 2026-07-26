@@ -22,9 +22,9 @@ export const EMBLEM = {
 
   circle: {
     /** Rayon de l'axe médian du filet. */
-    r: 493.0,
-    /** Épaisseur du filet (1,4 % du diamètre). */
-    stroke: 14.0,
+    r: 481,
+    /** Épaisseur du filet (3,8 % du diamètre). */
+    stroke: 38,
   },
 
   /** Les trois piliers — le « H ouvert » : soutien, hospitalité, hôpital. */
@@ -47,7 +47,7 @@ export const EMBLEM = {
    * déplace. Ce décalage est intentionnel — ne pas « aligner ».
    */
   sabre: {
-    stroke: 14.0,
+    stroke: 26,
     /** Inclinaison réelle mesurée, en degrés depuis l'horizontale. */
     angleDeg: 66.16,
     /** Trait haut : du filet vers l'angle supérieur gauche de la tête. */
@@ -61,10 +61,10 @@ export const EMBLEM = {
    * qu'elles recouvrent. C'est elle qui donne sa lisibilité à l'emblème dans
    * les petites tailles.
    */
-  keyline: 52.0,
+  keyline: 60,
 
   /** Épaisseur du contour de la tête. */
-  headStroke: 14.0,
+  headStroke: 18,
 
   /** Ordonnée à partir de laquelle le pilier central réapparaît dans la gueule. */
   mouthY: 733.7,

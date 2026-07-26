@@ -87,6 +87,7 @@
   --color-nm-blue: #5478a8; /* Bleu Napoléon — structure, titres */
   --color-nm-blue-light: #7fa0c6; /* Bleu clair — § 08, décoratif */
   --color-nm-ink: #1a2540; /* Bleu Nuit — autorité, encre */
+  --color-nm-slate: #253846; /* Bleu du logotype */
   --color-nm-deep: #1f3a6b; /* Bleu Profond — CTA forts */
   --color-nm-gold: #dfb670; /* Doré Médical — accent prestige */
   --color-nm-terracotta: #d77962; /* Terracotta — accent éditorial */
@@ -100,23 +101,25 @@
   --color-nm-black: #151616; /* Noir — § 08 */
 
   /* ---------------------------------------------------------------------
-     EXTENSIONS
-     Absentes de la charte, nécessaires à un produit logiciel. Chacune est
-     dérivée de la palette officielle et vérifiée en contraste WCAG AA sur
-     Paper (#FFFFFF) et sur Ivoire (#F3F1EC).
-     --------------------------------------------------------------------- */
-  --color-nm-ink-deep: #101832; /* fonds sombres profonds — 17,5:1 */
-  --color-nm-gold-ink: #7e5f26; /* l'or en TEXTE sur fond clair — 5,9:1 */
-  --color-nm-blue-ink: #3f5f8c; /* le bleu en TEXTE courant — 6,5:1 */
-  --color-nm-muted-strong: #6b7688; /* texte secondaire lisible — 4,6:1 */
-  --color-nm-border-strong: #cfd5de; /* filets appuyés, séparateurs */
+     C'EST TOUTE LA PALETTE. Il n'y a pas d'autre teinte.
 
-  /* États. Le rouge pur est proscrit : la charte tient la chaleur par le
-     terracotta, qui sert donc aussi d'alerte. */
-  --color-nm-success: #3f7a64; /* 5,0:1 */
-  --color-nm-warning: #8f6520; /* 5,2:1 */
-  --color-nm-danger: #b85a45; /* = Terracotta Deep, 4,6:1 */
-  --color-nm-info: #1f3a6b; /* = Bleu Profond, 11,2:1 */
+     Une interface a besoin de nuances que ces quinze valeurs ne couvrent pas
+     (filets, survols, fonds d'encarts). Elles s'obtiennent EXCLUSIVEMENT par
+     opacité sur une couleur ci-dessus — `border-nm-ink-soft/22`,
+     `bg-nm-gold/12`. Une opacité n'introduit aucune teinte nouvelle ; un
+     nouveau code hexadécimal, si. Ne jamais en ajouter un.
+
+     ÉTATS — la charte n'en prévoit pas, ils sont donc composés avec elle :
+
+       information   nm-blue              4,54:1 sur blanc
+       validation    nm-deep             11,20:1
+       vigilance     nm-gold en filet + texte nm-ink   (l'or ne s'écrit pas)
+       alerte        nm-terracotta-deep   4,58:1
+
+     La validation en bleu plutôt qu'en vert est une conséquence directe de
+     la palette : il n'y a pas de vert dans la charte. Aucun état ne repose
+     sur la seule couleur — le libellé porte toujours l'information.
+     --------------------------------------------------------------------- */
 
   /* ---------------------------------------------------------------------
      RAYONS

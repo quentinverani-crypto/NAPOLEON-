@@ -58,7 +58,7 @@ export function Stat({
           <span
             className={cn(
               "text-title-sm font-normal",
-              inverse ? "text-nm-gold" : "text-nm-gold-ink",
+              inverse ? "text-nm-gold" : "text-nm-ink",
             )}
           >
             {unit}
@@ -77,7 +77,7 @@ export function Stat({
         <p
           className={cn(
             "font-text text-caption",
-            inverse ? "text-nm-paper/60" : "text-nm-muted-strong",
+            inverse ? "text-nm-paper/60" : "text-nm-ink-soft",
           )}
         >
           {footnote}

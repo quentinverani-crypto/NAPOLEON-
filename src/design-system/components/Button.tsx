@@ -33,14 +33,14 @@ const button = cva(
         /* Contour encre — l'alternative sobre au primaire. */
         outline: "border border-nm-ink/25 text-nm-ink hover:border-nm-ink/60 hover:bg-nm-ivory/60",
         /* L'or EN FILET, jamais en aplat. Supports prestige et institutionnels. */
-        gold: "border border-nm-gold text-nm-gold-ink hover:bg-nm-gold/12",
+        gold: "border border-nm-gold text-nm-ink hover:bg-nm-gold/12",
         /* Sur fond encre. */
         inverse: "bg-nm-paper text-nm-ink hover:bg-nm-ivory",
         /* Discret — barres d'outils, actions de ligne. */
         ghost: "text-nm-ink-soft hover:bg-nm-ivory hover:text-nm-ink",
         /* Destructif. Terracotta Deep : la charte n'a pas de rouge, et n'en
            veut pas — la chaleur suffit à signaler. */
-        danger: "bg-nm-danger text-nm-paper hover:bg-nm-terracotta-deep/85",
+        danger: "bg-nm-terracotta-deep text-nm-paper hover:bg-nm-terracotta-deep/85",
       },
       size: {
         sm: "h-9 px-4 text-body-sm [&_svg]:size-4",

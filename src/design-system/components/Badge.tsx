@@ -20,14 +20,14 @@ const badge = cva(
     variants: {
       tone: {
         neutral: "bg-nm-ivory text-nm-ink-soft border-nm-border",
-        blue: "bg-nm-blue/10 text-nm-blue-ink border-nm-blue/25",
-        gold: "bg-nm-gold/14 text-nm-gold-ink border-nm-gold/40",
-        success: "bg-nm-success/10 text-nm-success border-nm-success/25",
-        warning: "bg-nm-warning/10 text-nm-warning border-nm-warning/25",
-        danger: "bg-nm-danger/10 text-nm-danger border-nm-danger/25",
+        blue: "bg-nm-blue/10 text-nm-blue border-nm-blue/25",
+        gold: "bg-nm-gold/14 text-nm-ink border-nm-gold/40",
+        success: "bg-nm-deep/8 text-nm-deep border-nm-deep/30",
+        warning: "bg-nm-gold/16 text-nm-ink border-nm-gold/55",
+        danger: "bg-nm-terracotta-deep/10 text-nm-terracotta-deep border-nm-terracotta-deep/30",
         ink: "bg-nm-ink text-nm-ivory border-transparent",
-        /* Sur fond encre uniquement : le doré plein atteint 8:1 sur #1A2540,
-           là où `gold` (text-nm-gold-ink) y devient illisible. */
+        /* Sur fond sombre uniquement : le Doré Médical plein y atteint 8:1,
+           là où sur fond clair il plafonne à 1,9:1 et ne s'écrit pas. */
         "gold-inverse": "bg-nm-gold/10 text-nm-gold border-nm-gold/45",
         "paper-inverse": "bg-nm-paper/8 text-nm-ivory border-nm-paper/25",
       },
@@ -64,7 +64,7 @@ export function SectionNumber({
   return (
     <span
       className={cn(
-        "font-display nm-nums text-nm-gold-ink inline-flex items-baseline gap-1 text-caption tracking-[0.18em] uppercase",
+        "font-display nm-nums text-nm-ink inline-flex items-baseline gap-1 text-caption tracking-[0.18em] uppercase",
         className,
       )}
       {...props}

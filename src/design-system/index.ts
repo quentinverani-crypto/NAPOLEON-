@@ -18,7 +18,7 @@ export { gelasio, openSans, designSystemFontVariables } from "./fonts";
 
 export {
   PALETTE,
-  EXTENSIONS,
+  STATES,
   TYPE_SCALE,
   RADIUS,
   ELEVATION,
@@ -31,6 +31,7 @@ export { EMBLEM } from "./brand/emblem-geometry";
 export { Emblem, type EmblemProps, type EmblemVariant } from "./brand/Emblem";
 export {
   Logotype,
+  BASELINE,
   type LogotypeProps,
   type LogotypeVariant,
   type LogotypeTone,

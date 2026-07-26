@@ -6,8 +6,9 @@ import { EMBLEM as E } from "./emblem-geometry";
  * Toute autre combinaison est proscrite (§ 10 : « Changer les couleurs »).
  */
 export type EmblemVariant =
-  | "ink" /* encre sur clair — usage par défaut */
-  | "blue" /* bleu Napoléon sur clair */
+  | "slate" /* #253846, le bleu du logotype — usage par défaut */
+  | "ink" /* Bleu Nuit sur clair */
+  | "blue" /* Bleu Napoléon sur clair */
   | "gold" /* or sur clair — supports prestige */
   | "gold-on-ink" /* or sur encre — protocolaire, § 07 */
   | "cream-on-ink" /* crème sur encre — fonds sombres */
@@ -16,6 +17,7 @@ export type EmblemVariant =
   | "current"; /* hérite de `currentColor` */
 
 const PALETTE = {
+  slate: "#253846",
   ink: "#1a2540",
   blue: "#5478a8",
   gold: "#dfb670",
@@ -31,6 +33,7 @@ const PALETTE = {
  * lui-même dans les petites tailles.
  */
 const VARIANTS: Record<EmblemVariant, { mark: string; field: string }> = {
+  slate: { mark: PALETTE.slate, field: PALETTE.paper },
   ink: { mark: PALETTE.ink, field: PALETTE.paper },
   blue: { mark: PALETTE.blue, field: PALETTE.paper },
   gold: { mark: PALETTE.gold, field: PALETTE.paper },
@@ -84,7 +87,7 @@ export type EmblemProps = EmblemBase & {
  * devient sous-pixellique et le dessin se referme.
  */
 export function Emblem({
-  variant = "ink",
+  variant = "slate",
   size = 40,
   filled = false,
   field,

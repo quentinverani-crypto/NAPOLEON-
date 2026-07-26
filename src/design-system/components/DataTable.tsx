@@ -48,7 +48,7 @@ export function Table({
           className={cn(
             captionHidden
               ? "sr-only"
-              : "text-nm-muted-strong border-nm-border border-b px-4 py-3 text-left text-caption",
+              : "text-nm-ink-soft border-nm-border border-b px-4 py-3 text-left text-caption",
           )}
         >
           {caption}

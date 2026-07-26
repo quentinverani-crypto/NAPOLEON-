@@ -10,14 +10,15 @@ tout ce qui vit hors du code — slides, PDF, signatures e-mail, imprimeur.
 
 | Fichier | Usage |
 |---|---|
-| `embleme-encre.svg` | défaut, sur fond blanc |
+| `embleme-ardoise.svg` | défaut — Bleu Ardoise #253846, sur fond blanc |
+| `embleme-encre.svg` | Bleu Nuit sur fond blanc |
 | `embleme-bleu.svg` | Bleu Napoléon sur fond blanc |
 | `embleme-or.svg` | supports prestige, fond blanc |
 | `embleme-mono.svg` | impression monochrome, gravure, tampon |
 | `embleme-or-sur-encre.svg` | protocolaire — charte § 07 |
 | `embleme-creme-sur-encre.svg` | fonds sombres |
 | `embleme-negatif-sur-bleu.svg` | blanc sur Bleu Napoléon |
-| `embleme-encre-sur-ivoire.svg` | fond chaud |
+| `embleme-ardoise-sur-ivoire.svg` | fond chaud |
 
 Le liseré de réserve est cuit dans chaque fichier : un export ne peut donc PAS
 être reposé sur un fond d'une autre couleur que celle de son nom. Pour une

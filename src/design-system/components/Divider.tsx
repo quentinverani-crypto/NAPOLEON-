@@ -32,7 +32,7 @@ export function LabelledDivider({
   return (
     <div className={cn("flex items-center gap-4", className)} {...props}>
       <span className="nm-hairline-gold flex-1" aria-hidden="true" />
-      <span className="nm-eyebrow text-nm-muted-strong shrink-0">{children}</span>
+      <span className="nm-eyebrow text-nm-ink-soft shrink-0">{children}</span>
       <span className="nm-hairline-gold flex-1" aria-hidden="true" />
     </div>
   );

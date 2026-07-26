@@ -13,11 +13,12 @@ import {
   Display,
   Divider,
   ELEVATION,
-  EXTENSIONS,
+  STATES,
   Emblem,
   Eyebrow,
   Field,
   GoldRule,
+  BASELINE,
   IMPERIAL_ANGLE_DEG,
   LabelledDivider,
   Lead,
@@ -71,7 +72,7 @@ function Section({
         <div className="flex items-center gap-4">
           <SectionNumber value={n} />
           <span className="nm-hairline-gold w-16" aria-hidden="true" />
-          <Eyebrow tone="muted">{eyebrow}</Eyebrow>
+          <Eyebrow tone="blue">{eyebrow}</Eyebrow>
         </div>
         <Title size="lg" as="h2">
           {title}
@@ -117,9 +118,9 @@ function Swatch({ c }: { c: ColorToken }) {
       </div>
       <div className="flex flex-col gap-1 p-3">
         <p className="font-text text-body-sm text-nm-ink font-semibold">{c.name}</p>
-        <code className="font-mono text-nm-blue-ink text-[0.6875rem]">{c.token}</code>
-        <p className="font-text text-caption text-nm-muted-strong">{c.usage}</p>
-        <p className="font-text nm-nums text-[0.6875rem] text-nm-muted-strong">
+        <code className="font-mono text-nm-blue text-[0.6875rem]">{c.token}</code>
+        <p className="font-text text-caption text-nm-ink-soft">{c.usage}</p>
+        <p className="font-text nm-nums text-[0.6875rem] text-nm-ink-soft">
           {c.onPaper.toFixed(2)}:1 sur blanc — {pass}
         </p>
       </div>
@@ -141,7 +142,7 @@ export default function DesignSystemPage() {
         <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-20">
           <Logotype variant="primary" tone="gold-on-ink" size="lg" />
           <div className="flex flex-col gap-4">
-            <Eyebrow tone="gold">Volume II · Système d&apos;interface · Édition 2026</Eyebrow>
+            <Eyebrow tone="inverse">Volume II · Système d&apos;interface · Édition 2026</Eyebrow>
             <Display size="lg" tone="inverse" as="h1">
               Le design system.
             </Display>
@@ -173,49 +174,53 @@ export default function DesignSystemPage() {
           n={1}
           eyebrow="Identité"
           title="Le logotype"
-          intro="Quatre verrouillages normés. Le primaire signe la première apparition de la marque ; le secondaire porte l'usage courant. En dessous de 24 px, l'emblème seul en monochrome."
+          intro="Deux verrouillages, et deux seulement. Le primaire signe à l'horizontale ; le secondaire s'empile là où il n'y a pas la place d'une ligne. La signature « La voix médicale souveraine » ne fait pas partie du logotype : elle s'écrit dans la mise en page."
         >
           <div className="flex flex-col gap-6">
             <Surface padding="lg" className="flex flex-col gap-10">
-              <Spec label="Primaire · logo + nom + baseline">
+              <Spec label="Primaire · emblème + nom">
                 <Logotype variant="primary" size="lg" />
                 <Caption>
-                  Supports institutionnels, documents officiels, première apparition.
+                  La signature de référence. En-têtes, supports commerciaux, signatures
+                  e-mail, documents officiels.
                 </Caption>
               </Spec>
               <Divider />
-              <Spec label="Secondaire · logo + nom">
-                <Logotype variant="secondary" size="md" />
+              <Spec label="Secondaire · empilé">
+                <Logotype variant="secondary" size="lg" />
                 <Caption>
-                  Supports commerciaux, signatures e-mail, présentations, en-têtes
-                  d&apos;application.
+                  Formats étroits, carrés, avatars larges — tout ce qui n&apos;a pas la place
+                  d&apos;une ligne.
                 </Caption>
               </Spec>
-              <Divider />
-              <div className="grid gap-10 sm:grid-cols-2">
-                <Spec label="Empilé · formats étroits">
-                  <Logotype variant="stacked" size="md" />
-                </Spec>
-                <Spec label="Nom seul · l'emblème figure déjà ailleurs">
-                  <Logotype variant="wordmark" size="md" />
-                </Spec>
-              </div>
             </Surface>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-3">
               <Surface tone="ink" border="inverse" padding="lg" className="flex flex-col gap-4">
-                <Caption className="nm-eyebrow text-nm-gold">Protocolaire · or sur encre</Caption>
-                <Logotype variant="primary" tone="gold-on-ink" size="md" />
-                <Caption className="text-nm-paper/60">
-                  Documents administratifs, certifications, supports contractuels.
-                </Caption>
+                <Caption className="nm-eyebrow text-nm-gold">Or sur encre</Caption>
+                <Logotype variant="primary" tone="gold-on-ink" size="sm" />
+                <Caption className="text-nm-paper/60">Protocolaire — charte § 07.</Caption>
               </Surface>
               <Surface padding="lg" className="flex flex-col gap-4">
-                <Caption className="nm-eyebrow">Monochrome · impression contrainte</Caption>
-                <Logotype variant="primary" tone="mono" size="md" />
+                <Caption className="nm-eyebrow">Monochrome</Caption>
+                <Logotype variant="primary" tone="mono" size="sm" />
                 <Caption>Fax, gravure, tampon, photocopie.</Caption>
               </Surface>
+              <Surface tone="ink" border="inverse" padding="lg" className="flex flex-col gap-4">
+                <Caption className="nm-eyebrow text-nm-ivory">Négatif</Caption>
+                <Logotype variant="primary" tone="negative" size="sm" field="#1A2540" />
+                <Caption className="text-nm-paper/60">Fond coloré ou photographique.</Caption>
+              </Surface>
             </div>
+
+            <Surface tone="ivory" border="gold" padding="lg" className="flex flex-col gap-3">
+              <Caption className="nm-eyebrow">La signature, hors logotype</Caption>
+              <p className="font-display text-title-lg text-nm-slate">{BASELINE}</p>
+              <Caption>
+                Elle se compose dans la page, à distance du verrouillage — jamais accrochée
+                sous le nom.
+              </Caption>
+            </Surface>
 
             <Callout tone="gold" title="Zone de protection — charte § 10">
               Conserver tout autour du logotype un espace libre égal à <strong>½ × le
@@ -239,14 +244,14 @@ export default function DesignSystemPage() {
               <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
                 {(
                   [
-                    ["ink", "Encre", "bg-nm-paper"],
+                    ["slate", "Bleu Ardoise", "bg-nm-paper"],
                     ["blue", "Bleu Napoléon", "bg-nm-paper"],
                     ["gold", "Or", "bg-nm-paper"],
                     ["mono", "Monochrome", "bg-nm-paper"],
                     ["gold-on-ink", "Or sur encre", "bg-nm-ink"],
                     ["cream-on-ink", "Crème sur encre", "bg-nm-ink"],
                     ["negative", "Négatif", "bg-nm-blue"],
-                    ["ink", "Sur ivoire", "bg-nm-ivory"],
+                    ["slate", "Sur ivoire", "bg-nm-ivory"],
                   ] as const
                 ).map(([variant, label, bg], i) => (
                   <div key={`${variant}-${i}`} className="flex flex-col items-center gap-3">
@@ -322,25 +327,25 @@ export default function DesignSystemPage() {
           <div className="flex flex-col gap-6">
             <div className="grid gap-4 sm:grid-cols-2">
               <Surface padding="lg" className="flex flex-col gap-3">
-                <Caption className="nm-eyebrow text-nm-gold-ink">Georgia · font-display</Caption>
+                <Caption className="nm-eyebrow text-nm-ink">Georgia · font-display</Caption>
                 <p className="font-display text-display-sm text-nm-ink">NAPOLEON Médical</p>
                 <Caption>
                   Le nom, les titres, les chiffres-clés, les citations. Serif à grande
                   hauteur d&apos;x — la prestance sans la raideur.
                 </Caption>
-                <Caption className="text-nm-muted-strong">
+                <Caption className="text-nm-ink-soft">
                   Secours : Gelasio, substitut libre aux métriques identiques. Aucun
                   décalage de mise en page là où Georgia manque (Android, Linux).
                 </Caption>
               </Surface>
               <Surface padding="lg" className="flex flex-col gap-3">
-                <Caption className="nm-eyebrow text-nm-gold-ink">Open Sans · font-text</Caption>
+                <Caption className="nm-eyebrow text-nm-ink">Open Sans · font-text</Caption>
                 <p className="font-text text-title-lg text-nm-ink">La voix médicale souveraine</p>
                 <Caption>
                   Tous les contenus, sans exception : corps, formulaires, tableaux,
                   surtitres, légendes, messages d&apos;erreur.
                 </Caption>
-                <Caption className="text-nm-muted-strong">
+                <Caption className="text-nm-ink-soft">
                   Neutre, très lisible en petit corps et en écran partagé — ce que demande
                   une consultation.
                 </Caption>
@@ -355,7 +360,7 @@ export default function DesignSystemPage() {
                     className="flex flex-col gap-3 p-6 sm:flex-row sm:items-baseline sm:gap-8"
                   >
                     <div className="flex w-52 shrink-0 flex-col gap-1">
-                      <code className="font-mono text-nm-blue-ink text-[0.6875rem]">
+                      <code className="font-mono text-nm-blue text-[0.6875rem]">
                         {t.cls}
                       </code>
                       <Caption className="nm-nums">
@@ -393,36 +398,49 @@ export default function DesignSystemPage() {
           n={4}
           eyebrow="Fondations"
           title="Palette"
-          intro="Les quatorze teintes officielles de la charte § 11, plus les extensions qu'un logiciel médical exige. Chaque valeur porte son contraste mesuré : c'est ce qui décide de son usage, pas le goût."
+          intro="Quinze valeurs, pas une de plus : les quatorze de la charte § 11 et § 08, et le Bleu Ardoise du logotype. Chaque valeur porte son contraste mesuré — c'est lui qui décide de l'usage, pas le goût."
         >
           <div className="flex flex-col gap-8">
-            <div>
-              <Caption className="nm-eyebrow mb-4">Officielle · charte § 11 et § 08</Caption>
-              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                {PALETTE.map((c) => (
-                  <Swatch key={c.token} c={c} />
-                ))}
-              </div>
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {PALETTE.map((c) => (
+                <Swatch key={c.token} c={c} />
+              ))}
             </div>
 
-            <div>
-              <Caption className="nm-eyebrow mb-4">
-                Extensions · dérivées, vérifiées en contraste
+            <Callout tone="info" title="Il n'y a pas d'autre teinte">
+              Une interface a besoin de nuances que ces quinze valeurs ne couvrent pas :
+              filets, survols, fonds d&apos;encarts. Elles s&apos;obtiennent{" "}
+              <strong>exclusivement par opacité</strong> sur une couleur ci-dessus —{" "}
+              <code>border-nm-ink-soft/45</code>, <code>bg-nm-gold/12</code>. Une opacité
+              n&apos;introduit aucune teinte nouvelle ; un nouveau code hexadécimal, si.
+            </Callout>
+
+            <Surface padding="lg" className="flex flex-col gap-5">
+              <Caption className="nm-eyebrow">
+                États — composés avec la charte, sans y ajouter
               </Caption>
-              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                {EXTENSIONS.map((c) => (
-                  <Swatch key={c.token} c={c} />
-                ))}
-              </div>
-            </div>
+              {STATES.map((st) => (
+                <div key={st.state} className="flex items-start gap-4">
+                  <span
+                    className={`mt-1 size-4 shrink-0 rounded-nm-xs ${st.cls}`}
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <p className="font-text text-body-sm text-nm-ink font-semibold">
+                      {st.state}
+                    </p>
+                    <Caption>{st.note}</Caption>
+                  </div>
+                </div>
+              ))}
+            </Surface>
 
             <Callout tone="danger" title="Le doré ne s'écrit pas sur fond clair">
-              Doré Médical <code>#DFB670</code>{" "} plafonne à <strong>1,9:1</strong>{" "} sur blanc —
-              illisible en texte. La charte le dit autrement (« l&apos;or, jamais en aplat
-              dominant — en touche seulement ») ; le contraste le confirme. Pour écrire en
-              or sur fond clair, utiliser <code>nm-gold-ink</code>{" "} (5,9:1). Le doré du
-              logotype fait exception : les logotypes sont explicitement exemptés du critère
-              WCAG 1.4.3.
+              Doré Médical <code>#DFB670</code>{" "} plafonne à <strong>1,9:1</strong>{" "} sur blanc.
+              La charte le dit déjà autrement — « l&apos;or, jamais en aplat dominant, en
+              touche seulement » — et le contraste le confirme. L&apos;or reste donc une
+              couleur de filet et d&apos;aplat, jamais de texte. Seul le logotype fait
+              exception : les logotypes sont explicitement exemptés du critère WCAG 1.4.3.
             </Callout>
           </div>
         </Section>
@@ -441,10 +459,10 @@ export default function DesignSystemPage() {
               {RADIUS.map((r) => (
                 <div key={r.token} className="flex items-center gap-4">
                   <div
-                    className={`bg-nm-ivory border-nm-border-strong size-12 shrink-0 border ${r.cls}`}
+                    className={`bg-nm-ivory border-nm-ink-soft/45 size-12 shrink-0 border ${r.cls}`}
                   />
                   <div className="min-w-0">
-                    <code className="font-mono text-nm-blue-ink text-[0.6875rem]">
+                    <code className="font-mono text-nm-blue text-[0.6875rem]">
                       {r.token}
                     </code>
                     <Caption>
@@ -463,7 +481,7 @@ export default function DesignSystemPage() {
                     className={`bg-nm-paper rounded-nm-md size-12 shrink-0 ${e.cls}`}
                   />
                   <div className="min-w-0">
-                    <code className="font-mono text-nm-blue-ink text-[0.6875rem]">
+                    <code className="font-mono text-nm-blue text-[0.6875rem]">
                       {e.token}
                     </code>
                     <Caption>{e.usage}</Caption>
@@ -556,7 +574,7 @@ export default function DesignSystemPage() {
               </Card>
               <Card tone="ivory" border="gold" interactive>
                 <CardHeader>
-                  <Caption className="nm-eyebrow text-nm-gold-ink">Carte interactive</Caption>
+                  <Caption className="nm-eyebrow text-nm-ink">Carte interactive</Caption>
                   <Title size="sm">Souveraineté des données</Title>
                 </CardHeader>
                 <CardBody>

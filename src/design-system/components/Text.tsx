@@ -16,22 +16,26 @@ import { cn } from "@/lib/utils";
    Charte § 13 : « un titre fort, un sous-titre discret, un corps lisible ».
    ========================================================================= */
 
+/**
+ * Les seules couleurs de texte du système, toutes tirées de la charte § 11.
+ *
+ * Ni le Doré Médical (1,9:1) ni le Muted (2,6:1) ni le Terracotta (3,1:1)
+ * n'y figurent : sur fond clair, aucun des trois n'est lisible en texte. Ils
+ * restent des couleurs de FILET et d'APLAT — ce que dit déjà la charte du
+ * doré, « en touche seulement ».
+ */
 type Tone =
-  | "default" /* encre — texte principal */
-  | "soft" /* ink-soft — texte courant sur fond clair */
-  | "muted" /* secondaire, toujours lisible (4,6:1) */
-  | "accent" /* terracotta deep — emphase éditoriale */
-  | "gold" /* or lisible en texte (5,9:1), PAS le doré du logo */
-  | "blue" /* bleu Napoléon lisible (6,5:1) */
-  | "inverse"; /* sur fond encre */
+  | "default" /* Bleu Nuit — texte principal, 15,2:1 */
+  | "soft" /* Ink Soft — texte courant, 7,4:1 */
+  | "accent" /* Terracotta Deep — emphase éditoriale, 4,6:1 */
+  | "blue" /* Bleu Napoléon — surtitres, liens, 4,5:1 */
+  | "inverse"; /* sur fond sombre */
 
 const TONES: Record<Tone, string> = {
   default: "text-nm-ink",
   soft: "text-nm-ink-soft",
-  muted: "text-nm-muted-strong",
   accent: "text-nm-terracotta-deep",
-  gold: "text-nm-gold-ink",
-  blue: "text-nm-blue-ink",
+  blue: "text-nm-blue",
   inverse: "text-nm-paper",
 };
 
@@ -140,7 +144,7 @@ export function Body({
 /* ---------------------------------------------------------------------------
    LÉGENDE — Open Sans. Mentions, horodatages, aides de saisie.
    --------------------------------------------------------------------------- */
-export function Caption({ tone = "muted", as: Tag = "p", className, children }: BaseProps) {
+export function Caption({ tone = "soft", as: Tag = "p", className, children }: BaseProps) {
   return (
     <Tag className={cn("font-text text-caption", TONES[tone], className)}>{children}</Tag>
   );
@@ -164,7 +168,7 @@ export function Quote({
         {children}
       </blockquote>
       {attribution && (
-        <figcaption className="nm-eyebrow text-nm-muted-strong mt-3">
+        <figcaption className="nm-eyebrow text-nm-ink-soft mt-3">
           {attribution}
         </figcaption>
       )}
