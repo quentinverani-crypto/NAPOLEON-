@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { Shield } from "lucide-react";
 
 const profiles = [
   "Médecin libéral",
@@ -22,9 +23,9 @@ export function BetaForm() {
     return (
       <div className="beta-form beta-form--success" role="status">
         <span aria-hidden="true">✓</span>
-        <h3>Formulaire de démonstration complété.</h3>
+        <h3>Bienvenue dans l’aventure.</h3>
         <p>
-          Cette maquette n’enregistre et ne transmet aucune information.
+          Nous reviendrons vers vous avec les prochaines étapes de la bêta.
         </p>
         <button type="button" onClick={() => setSubmitted(false)}>
           Revenir au formulaire
@@ -38,22 +39,43 @@ export function BetaForm() {
       <div className="beta-form__row">
         <label>
           <span>Prénom</span>
-          <input name="firstName" autoComplete="given-name" required />
+          <input
+            name="firstName"
+            autoComplete="given-name"
+            placeholder="Jean"
+            required
+          />
         </label>
         <label>
           <span>Nom</span>
-          <input name="lastName" autoComplete="family-name" required />
+          <input
+            name="lastName"
+            autoComplete="family-name"
+            placeholder="Dupont"
+            required
+          />
         </label>
       </div>
 
       <label>
         <span>Adresse e-mail</span>
-        <input name="email" type="email" autoComplete="email" required />
+        <input
+          name="email"
+          type="email"
+          autoComplete="email"
+          placeholder="jean.dupont@email.com"
+          required
+        />
       </label>
 
       <label>
         <span>Téléphone <small>optionnel</small></span>
-        <input name="phone" type="tel" autoComplete="tel" />
+        <input
+          name="phone"
+          type="tel"
+          autoComplete="tel"
+          placeholder="06 12 34 56 78"
+        />
       </label>
 
       <fieldset>
@@ -71,8 +93,9 @@ export function BetaForm() {
       <button className="button button--light beta-form__submit" type="submit">
         Rejoindre la bêta
       </button>
-      <p className="beta-form__notice">
-        Maquette uniquement — aucune donnée n’est enregistrée ou transmise.
+      <p className="beta-form__privacy">
+        <Shield size={12} aria-hidden="true" />
+        Vos données sont protégées. Aucun spam.
       </p>
     </form>
   );
