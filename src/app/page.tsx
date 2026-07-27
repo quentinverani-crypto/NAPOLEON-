@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { DocumentStack } from "./components/DocumentStack";
+import { BetaForm } from "./components/BetaForm";
 import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 
 export default function Home() {
@@ -118,10 +119,14 @@ export default function Home() {
             <p className="eyebrow eyebrow--gold">La bêta</p>
             <h2>Construisons un outil vraiment utile en consultation.</h2>
             <p>La bêta est une phase de coconstruction avec des médecins libéraux. Vos usages, vos contraintes et vos retours guideront les derniers choix avant la commercialisation.</p>
+            <ul className="beta-benefits" aria-label="Ce que propose la bêta">
+              <li>Accès prioritaire à la bêta</li>
+              <li>Échange direct avec l’équipe fondatrice</li>
+              <li>Participation aux derniers choix produit</li>
+            </ul>
           </div>
-          <div className="beta-action reveal reveal--delay">
-            <a className="button button--light" href="mailto:contact@napoleonmedical.fr">Rejoindre la bêta</a>
-            <small>Une prise de contact simple, sans engagement.</small>
+          <div className="reveal reveal--delay">
+            <BetaForm />
           </div>
         </section>
       </main>
