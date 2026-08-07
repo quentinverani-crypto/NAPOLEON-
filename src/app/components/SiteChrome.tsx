@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 const navItems = [
-  { href: "/#plateforme", label: "La plateforme" },
+  { href: "/#documents", label: "La plateforme" },
   { href: "/histoire", label: "Notre histoire" },
   { href: "/tarifs", label: "Tarifs" },
 ];
@@ -10,10 +10,10 @@ export function SiteHeader() {
     <header className="site-header">
       <Link className="site-logo" href="/" aria-label="NAPOLÉON Médical — Accueil">
         <Image
-          src="/assets/napoleon-medical-logo.webp"
+          src="/assets/napoleon-medical-logo-2026.png"
           alt="NAPOLÉON Médical"
-          width={1187}
-          height={169}
+          width={869}
+          height={175}
           sizes="(max-width: 900px) 205px, 282px"
         />
       </Link>
@@ -36,16 +36,16 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div>
         <Image
-          src="/assets/napoleon-medical-logo.webp"
+          src="/assets/napoleon-medical-logo-2026.png"
           alt="NAPOLÉON Médical"
-          width={1187}
-          height={169}
+          width={869}
+          height={175}
           sizes="270px"
         />
         <p>Retrouvez la relation patient.</p>
       </div>
-      <nav aria-label="Pied de page"><Link href="/#plateforme">La plateforme</Link><Link href="/histoire">Notre histoire</Link><Link href="/tarifs">Tarifs</Link><a href="mailto:contact@napoleonmedical.fr">Contact</a></nav>
-      <small>© 2026 NAPOLÉON Médical. Maquette visuelle.</small>
+      <nav aria-label="Pied de page"><Link href="/#documents">La plateforme</Link><Link href="/histoire">Notre histoire</Link><Link href="/tarifs">Tarifs</Link><a href="mailto:contact@napoleonmedical.fr">Contact</a></nav>
+      <small>© 2026 NAPOLÉON Médical.</small>
     </footer>
   );
 }

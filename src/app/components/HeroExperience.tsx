@@ -138,7 +138,12 @@ export function HeroExperience() {
           <div className="assistant-orb" aria-hidden="true">
             <span className="assistant-orb__pulse" />
             <span className="assistant-orb__core">
-              <Image src="/logos/napoleon-embleme-negatif-clean.svg" alt="" width={34} height={34} />
+              <Image
+                src="/assets/napoleon-assistant-listening.jpg"
+                alt=""
+                fill
+                sizes="68px"
+              />
             </span>
           </div>
 
