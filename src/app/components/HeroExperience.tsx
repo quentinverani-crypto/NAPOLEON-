@@ -96,7 +96,7 @@ export function HeroExperience() {
     <section className="hero-story" ref={storyRef} aria-labelledby="hero-title">
       <div className="hero-story__sticky">
         <div className="hero hero--story">
-          <div className="hero__copy reveal">
+          <div className="hero__copy">
             <p className="eyebrow">Le temps médical redevient humain</p>
             <h1 id="hero-title">Retrouvez la relation patient.</h1>
             <p className="hero__lead">
