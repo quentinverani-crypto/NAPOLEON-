@@ -10,7 +10,7 @@ export function SiteHeader() {
     <header className="site-header">
       <Link className="site-logo" href="/" aria-label="NAPOLÉON Médical — Accueil">
         <Image
-          src="/assets/napoleon-medical-logo-2026.png"
+          src="/assets/napoleon-medical-logo-transparent.png"
           alt="NAPOLÉON Médical"
           width={869}
           height={175}
@@ -36,7 +36,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div>
         <Image
-          src="/assets/napoleon-medical-logo-2026.png"
+          src="/assets/napoleon-medical-logo-transparent.png"
           alt="NAPOLÉON Médical"
           width={869}
           height={175}

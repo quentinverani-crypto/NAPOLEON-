@@ -51,9 +51,7 @@ export function HeroExperience() {
       const expansion = smoothstep(0.06, 0.35, progress);
       const copyFade = 1 - smoothstep(0.08, 0.26, progress);
       const originalNoteFade = 1 - smoothstep(0.15, 0.3, progress);
-      const orb = smoothstep(0.31, 0.42, progress);
-      const panel = smoothstep(0.41, 0.54, progress);
-      const documents = smoothstep(0.78, 0.87, progress);
+      const wideMedia = smoothstep(0.25, 0.38, progress);
       const exit = smoothstep(0.91, 1, progress);
 
       story.style.setProperty("--visual-left", `${46 * (1 - expansion)}vw`);
@@ -62,19 +60,11 @@ export function HeroExperience() {
       story.style.setProperty("--copy-opacity", `${copyFade}`);
       story.style.setProperty("--copy-shift", `${-24 * (1 - copyFade)}px`);
       story.style.setProperty("--original-note-opacity", `${originalNoteFade}`);
-      story.style.setProperty("--orb-opacity", `${orb}`);
-      story.style.setProperty("--orb-scale", `${0.72 + orb * 0.28}`);
-      story.style.setProperty("--panel-opacity", `${panel}`);
-      story.style.setProperty("--panel-scale", `${0.92 + panel * 0.08}`);
-      story.style.setProperty("--documents-opacity", `${documents}`);
+      story.style.setProperty("--wide-media-opacity", `${wideMedia}`);
       story.style.setProperty("--exit-opacity", `${exit}`);
 
-      consultationFields.forEach((_, index) => {
-        const start = 0.51 + index * 0.065;
-        const reveal = smoothstep(start, start + 0.105, progress);
-        story.style.setProperty(`--field-${index + 1}-clip`, `${100 * (1 - reveal)}%`);
-        story.style.setProperty(`--field-${index + 1}-opacity`, `${0.18 + reveal * 0.82}`);
-      });
+      if (expansion >= 0.97) story.dataset.sequence = "active";
+      else if (progress < 0.18) delete story.dataset.sequence;
     };
 
     const requestUpdate = () => {
@@ -121,11 +111,20 @@ export function HeroExperience() {
 
           <div className="hero__visual">
             <Image
+              className="hero-media__portrait"
               src="/assets/consultation-medecin-patient.webp"
               alt="Un médecin échange avec sa patiente sans écran entre eux"
               fill
               sizes="100vw"
               preload
+            />
+            <Image
+              className="hero-media__wide"
+              src="/assets/consultation-medecin-patient-wide.webp"
+              alt=""
+              fill
+              sizes="100vw"
+              aria-hidden="true"
             />
             <div className="status-note status-note--hero" aria-hidden="true">
               <div className="status-note__head"><span className="status-dot" /><strong>Compte rendu</strong></div>
@@ -144,6 +143,7 @@ export function HeroExperience() {
                 fill
                 sizes="68px"
               />
+              <i className="assistant-orb__color" />
             </span>
           </div>
 
