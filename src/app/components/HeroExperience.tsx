@@ -33,6 +33,7 @@ const consultationFields = [
 
 export function HeroExperience() {
   const storyRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const story = storyRef.current;
@@ -63,8 +64,21 @@ export function HeroExperience() {
       story.style.setProperty("--wide-media-opacity", `${wideMedia}`);
       story.style.setProperty("--exit-opacity", `${exit}`);
 
-      if (expansion >= 0.97) story.dataset.sequence = "active";
-      else if (progress < 0.18) delete story.dataset.sequence;
+      if (expansion >= 0.97 && story.dataset.sequence !== "active") {
+        story.dataset.sequence = "active";
+        const video = videoRef.current;
+        if (video) {
+          video.currentTime = 0;
+          void video.play().catch(() => undefined);
+        }
+      } else if (progress < 0.18 && story.dataset.sequence === "active") {
+        delete story.dataset.sequence;
+        const video = videoRef.current;
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+        }
+      }
     };
 
     const requestUpdate = () => {
@@ -118,12 +132,15 @@ export function HeroExperience() {
               sizes="100vw"
               preload
             />
-            <Image
+            <video
+              ref={videoRef}
               className="hero-media__wide"
-              src="/assets/consultation-medecin-patient-wide.webp"
-              alt=""
-              fill
-              sizes="100vw"
+              src="/assets/consultation-medecin-patient.mp4"
+              poster="/assets/consultation-medecin-patient-wide.webp"
+              preload="metadata"
+              muted
+              loop
+              playsInline
               aria-hidden="true"
             />
             <div className="status-note status-note--hero" aria-hidden="true">
