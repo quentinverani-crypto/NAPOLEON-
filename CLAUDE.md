@@ -1,1 +1,2 @@
 @AGENTS.md
+@MEMOIRE_CLAUDE_Napoleon.md
