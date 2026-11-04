@@ -33,6 +33,7 @@ Quentin demande : « comment être mieux cité par ChatGPT / Perplexity », « a
 - Hébergeur HDS non nommé ; témoignages prénoms seuls ; /a-propos mince ; spécialité de Quentin incohérente entre site (ORL) et un annuaire tiers (généraliste).
 - Anciens déploiements Vercel `napoleon-six.vercel.app` et `napoleon-site-vitrine-3.vercel.app` sans redirection.
 - Zéro mention externe ; index Google/Bing périmé.
+- Pages produit minces (dictee-medicale ≈ 130 mots uniques, assistant-medical-ia ≈ 155, a-propos ≈ 100) contre FAQ ≈ 500 et articles ≈ 450-490.
 
 ## Journal des sessions
 - **2026-11-04** — Audit initial complet, plan A/B/C, kit, protocole de mesure. Décisions de Quentin : en attente.

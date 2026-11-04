@@ -59,6 +59,7 @@
 | S10 | **Index périmé** : les moteurs affichent encore l'ancien titre et l'ancien positionnement (blockchain, 250 pionniers). | Les réponses IA héritent de l'index. | 1 h (GSC + Bing) |
 | S11 | **Deux anciens déploiements Vercel sans redirection** : `napoleon-six.vercel.app` (projet « napoleon ») et `napoleon-site-vitrine-3.vercel.app`. Le troisième (`napoleonmedicalsitevitrine.vercel.app`) redirige déjà vers www. **À vérifier** : s'ils servent encore l'ancien site sans `noindex`, ils entretiennent la confusion d'entité et le contenu dupliqué. | Contenu contradictoire crawlable. | 15 min |
 | S12 | Détails : `/essai-gratuit` (noindex) laisse fuir des gabarits `{{ … }}` ; pas de flux RSS pour /ressources ; pas de `dateModified` visible sur /tarifs et /securite-donnees ; pas de `llms-full.txt` (optionnel, non obligatoire). | Mineur. | 1 h |
+| S13 | **Pages produit et conversion minces** (mots uniques vus par un bot : /programme-fondateurs 91, /a-propos 100, /dictee-medicale 132, /assistant-medical-ia 155, /securite-donnees 177 ; à comparer à /faq 503 et aux articles ≈ 450-490). | Les IA extraient des passages de pages substantielles ; une page produit de 130 mots ne fournit rien à citer sur « comment ça marche », « quelles spécialités », « quel matériel ». Viser 600 à 900 mots utiles par page produit, avec sous-titres sous forme de questions. | 1 j |
 
 ### 2.3 Présence externe (le point bloquant)
 
