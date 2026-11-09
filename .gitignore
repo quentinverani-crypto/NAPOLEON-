@@ -43,3 +43,6 @@ next-env.d.ts
 # Python bytecode (UI/UX Pro Max skill)
 .claude/skills/**/__pycache__/
 *.pyc
+
+# Préparation investisseurs (compétence investisseurs) — local, non versionné
+.investisseurs/
