@@ -1,17 +1,44 @@
 import type { Metadata } from "next";
 import { figtree, gfsDidot, newsreader, manrope } from "@/lib/fonts";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TAGLINE,
+  SITE_URL,
+} from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NAPOLEON Medical — La voix médicale souveraine",
-  description:
-    "L'assistant IA qui libère le médecin de l'administratif. Reconnaissance vocale, comptes rendus automatiques, données souveraines. Rejoignez la bêta.",
+  metadataBase: new URL(SITE_URL),
+  title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { "max-snippet": -1, "max-image-preview": "large" },
+  },
   openGraph: {
-    title: "NAPOLEON Medical — La voix médicale souveraine",
-    description:
-      "L'assistant IA qui libère le médecin de l'administratif pour recentrer la consultation sur l'essentiel : le patient.",
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    siteName: SITE_NAME,
     type: "website",
     locale: "fr_FR",
+    images: [
+      {
+        url: "/vitrine/embleme-or-sur-bleu.png",
+        width: 1650,
+        height: 1634,
+        alt: SITE_NAME,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    images: ["/vitrine/embleme-or-sur-bleu.png"],
   },
 };
 

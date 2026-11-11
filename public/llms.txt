@@ -1,0 +1,32 @@
+# NAPOLEON Médical
+
+> NAPOLEON Médical est un assistant IA de consultation médicale conçu en France, par un médecin, pour les médecins. Il écoute la consultation et génère automatiquement le dossier médical, les comptes rendus et les ordonnances, afin de libérer le médecin de l'administratif. Signature : « La voix médicale souveraine ».
+
+Le produit est en phase de bêta limitée : 250 médecins pionniers sont recherchés pour le tester. La bêta est gratuite et sans engagement.
+
+## Le problème adressé
+
+- Les médecins perdent 1 à 2 heures par jour en tâches administratives (dossiers, comptes rendus, ordonnances).
+- 1 médecin sur 2 présente des signes de burn-out.
+- 53 % des médecins y voient une perte de sens : la relation humaine s'efface derrière l'écran.
+
+## Comment ça marche
+
+1. Écoute active : le médecin parle, consulte et examine normalement ; NAPOLEON Médical écoute la consultation.
+2. Analyse IA : la parole est analysée, structurée et transformée en données médicales exploitables.
+3. Documents générés : dossier médical, comptes rendus et ordonnances sont produits automatiquement.
+
+## Les trois piliers
+
+- Traçabilité : des données infalsifiables grâce à la technologie blockchain.
+- Souveraineté : une IA française, hébergée en France dans des datacenters français, conforme RGPD et HDS.
+- Humanité : remettre l'écoute et le regard au centre de la consultation.
+
+## À qui s'adresse NAPOLEON Médical
+
+Médecins libéraux, médecins hospitaliers, exercice mixte, docteurs juniors et internes exerçant en France.
+
+## Pages
+
+- [Accueil](https://napoleonmedical.fr/): présentation du produit, constat, fonctionnement et engagements.
+- [Rejoindre la bêta](https://napoleonmedical.fr/#beta): formulaire d'inscription à la bêta gratuite (accès prioritaire, échange direct avec l'équipe fondatrice).
